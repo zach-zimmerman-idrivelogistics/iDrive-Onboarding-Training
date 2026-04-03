@@ -3,34 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claims Email Setup | iDrive Logistics Revenue Enablement</title>
+<title>Claims Email Setup | iDrive Logistics</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#1B3A6B;--accent:#5EAEFF;--green:#10B981;--bg:#F0F4FA;--sw:240px;--th:54px;--text:#1e293b;--muted:#64748b}
+:root{--navy:#1B3A6B;--accent:#5EAEFF;--green:#10B981;--bg:#F0F4FA;--sw:220px;--th:52px;--text:#1e293b;--muted:#64748b}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden}
 
 /* Sidebar */
 #sidebar{position:fixed;top:0;left:0;width:var(--sw);height:100vh;background:var(--navy);display:flex;flex-direction:column;z-index:300;overflow-y:auto}
-.sb-head{padding:16px 14px 12px;border-bottom:1px solid rgba(255,255,255,.1)}
-.sb-badge{background:rgba(94,174,255,.18);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:6px}
-.sb-course-title{color:#fff;font-size:12px;font-weight:600;line-height:1.4}
-.sb-nav{padding:12px 8px;flex:1}
-.nav-label{color:rgba(255,255,255,.4);font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:0 6px;margin-bottom:6px}
+.sb-head{padding:14px 12px 10px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sb-badge{background:rgba(94,174,255,.18);color:var(--accent);font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:5px}
+.sb-course-title{color:#fff;font-size:11.5px;font-weight:600;line-height:1.4}
+.sb-nav{padding:10px 6px;flex:1}
+.nav-label{color:rgba(255,255,255,.4);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:0 6px;margin-bottom:6px}
 .nav-item{display:flex;align-items:flex-start;gap:8px;padding:7px 6px;border-radius:8px;cursor:pointer;transition:background .15s;margin-bottom:2px}
 .nav-item:hover{background:rgba(255,255,255,.07)}
 .nav-item.active{background:rgba(94,174,255,.15)}
-.chk{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.chk{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px}
 .chk.done{background:var(--green);border-color:var(--green)}
-.chk.done::after{content:'';width:8px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block}
+.chk.done::after{content:'';width:7px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block}
 .chk.cur{border-color:var(--accent)}
-.chk.cur::after{content:'';width:7px;height:7px;background:var(--accent);border-radius:50%;display:block}
-.nav-txt{flex:1}
-.nav-num{color:rgba(255,255,255,.4);font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
-.nav-title{color:rgba(255,255,255,.82);font-size:12px;font-weight:500;line-height:1.3;margin-top:1px}
-.nav-item.active .nav-title{color:#fff;font-weight:600}
-.sb-foot{padding:12px 14px;border-top:1px solid rgba(255,255,255,.08)}
-.prog-lbl{color:rgba(255,255,255,.5);font-size:10px;display:flex;justify-content:space-between;margin-bottom:5px}
+.chk.cur::after{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;display:block}
+.nav-num{color:rgba(255,255,255,.4);font-size:9px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.nav-title{color:rgba(255,255,255,.8);font-size:11.5px;font-weight:500;line-height:1.3;margin-top:1px}
+.nav-item.active .nav-title{color:#fff;font-weight:700}
+.sb-foot{padding:10px 12px;border-top:1px solid rgba(255,255,255,.08)}
+.prog-lbl{color:rgba(255,255,255,.5);font-size:9.5px;display:flex;justify-content:space-between;margin-bottom:5px}
 .prog-track{height:4px;background:rgba(255,255,255,.12);border-radius:4px;overflow:hidden}
 .prog-fill{height:100%;background:var(--green);border-radius:4px;transition:width .4s ease;width:0%}
 
@@ -41,72 +40,58 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .wordmark em{color:var(--accent);font-style:normal}
 .mod-prog{font-size:12px;font-weight:600;color:var(--navy);background:#EEF4FF;padding:5px 14px;border-radius:20px;border:1px solid #c8d8f4;white-space:nowrap}
 
-/* Main area */
+/* Main */
 #main{margin-left:var(--sw);padding-top:var(--th);height:100vh;overflow:hidden}
-.cwrap{height:calc(100vh - var(--th));overflow:hidden;padding:12px 16px 10px;display:flex;flex-direction:column}
+.cwrap{height:calc(100vh - var(--th));display:flex;flex-direction:column;overflow:hidden}
 
-.msec{display:none}.msec.active{display:flex;flex-direction:column;height:100%;overflow:hidden}
+.msec{display:none}
+.msec.active{display:flex;flex-direction:column;height:100%;overflow:hidden}
 
-.mod-header{flex-shrink:0;margin-bottom:10px}
-.hot-tag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#b45309;background:#FEF9EC;border:1px solid #fde68a;padding:3px 10px;border-radius:20px;margin-bottom:6px}
-.mod-title{font-size:20px;font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:3px}
-.mod-sub{font-size:13px;color:var(--muted);line-height:1.4}
+/* ── TOP INSTRUCTION STRIP ── */
+.instr-strip{flex-shrink:0;background:#fff;border-bottom:2px solid #dde7f5;padding:14px 28px 14px;display:flex;align-items:center;gap:20px;min-height:0}
+.instr-step-badge{background:var(--navy);color:#fff;border-radius:50%;width:38px;height:38px;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.instr-body{flex:1;min-width:0}
+.instr-title{font-size:20px;font-weight:800;color:var(--navy);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.instr-desc{font-size:14px;color:#374151;line-height:1.6;margin-top:4px}
+.instr-nav{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:12px}
+.instr-counter{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
 
-/* Side-by-side content area */
-.content-row{display:flex;gap:14px;flex:1;min-height:0;overflow:hidden}
-
-/* LEFT: steps list */
-.steps-col{width:320px;flex-shrink:0;display:flex;flex-direction:column;min-height:0}
-.steps-scroll{display:flex;flex-direction:column;gap:6px;overflow-y:auto;flex:1;padding-right:4px;scroll-behavior:smooth;scrollbar-width:thin;min-height:0}
-.steps-scroll::-webkit-scrollbar{width:4px}
-.steps-scroll::-webkit-scrollbar-track{background:#e8eef7;border-radius:4px}
-.steps-scroll::-webkit-scrollbar-thumb{background:#b6cef5;border-radius:4px}
-.step-card{background:#fff;border-radius:9px;border:2px solid transparent;padding:7px 11px;cursor:pointer;transition:background .15s,border-color .15s,padding .2s;display:flex;gap:8px;align-items:flex-start;flex-shrink:0}
-.step-card:hover:not(.active){background:#f5f8ff;border-color:#dde7f5}
-.step-card.active{background:#EEF4FF;border-color:#5EAEFF;box-shadow:0 2px 12px rgba(94,174,255,.22);padding:14px 16px;flex-shrink:0}
-.step-num{width:22px;height:22px;background:var(--navy);color:#fff;border-radius:50%;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}
-.step-card.active .step-num{width:30px;height:30px;font-size:13px;background:var(--accent);margin-top:2px}
-.step-body{flex:1;min-width:0}
-.step-title{font-size:12px;font-weight:600;color:#64748b;line-height:1.3;transition:all .2s}
-.step-card.active .step-title{font-size:16px;font-weight:800;color:#1e40af;margin-bottom:6px}
-.step-desc{font-size:14px;color:#374151;line-height:1.65;margin-top:2px;display:none}
-.step-card.active .step-desc{display:block}
-
-.step-nav-row{display:flex;gap:7px;margin-top:10px;align-items:center;flex-shrink:0;flex-wrap:wrap}
-.step-counter{font-size:12px;color:var(--muted);font-weight:600;margin-left:auto}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:inherit}
-.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
-.btn-ghost{background:transparent;color:var(--navy);border:1px solid #c8d8f4}
-.btn-ghost:hover:not(:disabled){background:#EEF4FF}
-.btn-success{background:var(--green);color:#fff}
-.btn-success:hover{background:#0da374}
-.btn-primary{background:var(--navy);color:#fff}
-.btn-primary:hover:not(:disabled){background:#162f5a}
-.btn-sm{padding:7px 14px;font-size:12px}
-
-/* Format/tip/warn boxes */
-.format-box{background:#1e2d47;border-radius:9px;padding:12px 15px;margin:8px 0 0}
-.format-lbl{font-size:9.5px;font-weight:700;color:rgba(94,174,255,.7);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
-.format-code{color:#d1e3ff;font-size:12.5px;font-family:'Courier New',monospace;line-height:1.6;margin:0}
-.format-example{color:rgba(94,174,255,.8);font-size:11px;margin-top:4px;font-style:italic}
-.tip{background:#ECFDF5;border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;margin:8px 0 0}
-.tip-lbl{font-size:9.5px;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-.tip p{color:#065f46;margin:0;font-size:12.5px;line-height:1.55}
-.warn{background:#FEF9EC;border-left:4px solid #F59E0B;border-radius:0 8px 8px 0;padding:10px 14px;margin:8px 0 0}
-.warn-lbl{font-size:9.5px;font-weight:700;color:#b45309;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-.warn p{color:#78350f;margin:0;font-size:12.5px;line-height:1.55}
-
-/* RIGHT: screenshot panel — fills all remaining space */
-.screenshot-col{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
-.sf-card{background:#fff;border-radius:12px;border:1px solid #dde7f5;box-shadow:0 4px 20px rgba(27,58,107,.12);overflow:hidden;display:flex;flex-direction:column;height:100%}
+/* ── SCREENSHOT AREA — fills remaining space ── */
+.screenshot-area{flex:1;min-height:0;padding:10px 16px 10px;display:flex;flex-direction:column}
+.sf-card{border-radius:12px;border:1px solid #dde7f5;box-shadow:0 4px 24px rgba(27,58,107,.13);overflow:hidden;display:flex;flex-direction:column;flex:1;min-height:0;background:#fff}
 .sf-header{background:var(--navy);padding:8px 14px;display:flex;align-items:center;gap:8px;flex-shrink:0}
 .sf-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.sf-title{color:#fff;font-size:12px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sf-filetitle{color:#fff;font-size:12px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sf-step-badge{background:rgba(94,174,255,.25);color:var(--accent);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;white-space:nowrap;flex-shrink:0}
 .sf-img-wrap{flex:1;min-height:0;background:#1a1a2e;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:zoom-in}
 .sf-img-wrap img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;display:block;transition:opacity .25s ease}
 .zoom-hint{position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;padding:3px 8px;border-radius:10px;pointer-events:none}
-.sf-caption{padding:6px 14px;background:#f8fafd;border-top:1px solid #e8eef7;font-size:11px;color:var(--muted);line-height:1.4;font-style:italic;flex-shrink:0}
+.sf-caption{padding:6px 14px;background:#f8fafd;border-top:1px solid #e8eef7;font-size:11px;color:var(--muted);font-style:italic;flex-shrink:0}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:inherit;white-space:nowrap}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn-ghost{background:transparent;color:var(--navy);border:1px solid #c8d8f4}
+.btn-ghost:hover:not(:disabled){background:#EEF4FF}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover:not(:disabled){background:#162f5a}
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{background:#0da374}
+
+/* Format/tip/warn */
+.format-box{background:#1e2d47;border-radius:9px;padding:10px 14px;margin:8px 0 0;display:inline-block;max-width:100%}
+.format-lbl{font-size:9px;font-weight:700;color:rgba(94,174,255,.7);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.format-code{color:#d1e3ff;font-size:13px;font-family:'Courier New',monospace;line-height:1.6}
+.format-example{color:rgba(94,174,255,.8);font-size:11px;margin-top:3px;font-style:italic}
+.warn{background:#FEF9EC;border-left:4px solid #F59E0B;border-radius:0 8px 8px 0;padding:9px 13px;margin:8px 0 0;display:inline-block;max-width:100%}
+.warn-lbl{font-size:9px;font-weight:700;color:#b45309;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.warn p{color:#78350f;font-size:13px;line-height:1.55}
+
+/* Module step dots */
+.step-dots{display:flex;gap:5px;align-items:center;flex-shrink:0}
+.step-dot{width:7px;height:7px;border-radius:50%;background:#c8d8f4;transition:background .2s,transform .2s}
+.step-dot.active{background:var(--navy);transform:scale(1.4)}
+.step-dot.done{background:var(--green)}
 
 /* Zoom overlay */
 .zoom-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;padding:20px}
@@ -116,11 +101,11 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .zoom-close:hover{opacity:1}
 
 /* Complete screen */
-#comp{display:none;text-align:center;padding:60px 20px;height:100%;overflow:auto}
+#comp{display:none;text-align:center;padding:60px 20px;overflow:auto;height:100%}
 .comp-ring{width:80px;height:80px;background:var(--green);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center}
 .comp-ring svg{width:40px;height:40px;fill:#fff}
-.comp-title{font-size:28px;font-weight:800;color:var(--navy);margin-bottom:6px}
-.comp-msg{font-size:14px;color:#374151;max-width:500px;margin:14px auto 24px;line-height:1.65}
+.comp-title{font-size:28px;font-weight:800;color:var(--navy)}
+.comp-msg{font-size:14px;color:#374151;max-width:500px;margin:14px auto 20px;line-height:1.65}
 .comp-badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:16px 0}
 .comp-badge{background:#fff;border:1px solid #dde7f5;border-radius:10px;padding:10px 16px;font-size:12.5px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:7px}
 .btn-restart{background:#EEF4FF;color:var(--navy);border:1px solid #c8d8f4;padding:11px 26px;font-size:13px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:600;margin-top:10px}
@@ -135,30 +120,12 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
   </div>
   <div class="sb-nav">
     <div class="nav-label">Modules</div>
-    <div class="nav-item active" id="ni-1" onclick="goMod(1)">
-      <div class="chk cur" id="chk-1"></div>
-      <div class="nav-txt"><div class="nav-num">Module 1</div><div class="nav-title">Locate the Alias Email List</div></div>
-    </div>
-    <div class="nav-item" id="ni-2" onclick="goMod(2)">
-      <div class="chk" id="chk-2"></div>
-      <div class="nav-txt"><div class="nav-num">Module 2</div><div class="nav-title">Identify the Client's WMS</div></div>
-    </div>
-    <div class="nav-item" id="ni-3" onclick="goMod(3)">
-      <div class="chk" id="chk-3"></div>
-      <div class="nav-txt"><div class="nav-num">Module 3</div><div class="nav-title">Find the Shipping State</div></div>
-    </div>
-    <div class="nav-item" id="ni-4" onclick="goMod(4)">
-      <div class="chk" id="chk-4"></div>
-      <div class="nav-txt"><div class="nav-num">Module 4</div><div class="nav-title">Create the Claims Email</div></div>
-    </div>
-    <div class="nav-item" id="ni-5" onclick="goMod(5)">
-      <div class="chk" id="chk-5"></div>
-      <div class="nav-txt"><div class="nav-num">Module 5</div><div class="nav-title">Message Kaylynn in Slack</div></div>
-    </div>
-    <div class="nav-item" id="ni-6" onclick="goMod(6)">
-      <div class="chk" id="chk-6"></div>
-      <div class="nav-txt"><div class="nav-num">Module 6</div><div class="nav-title">Update the WMS Google Sheet</div></div>
-    </div>
+    <div class="nav-item active" id="ni-1" onclick="goMod(1)"><div class="chk cur" id="chk-1"></div><div><div class="nav-num">Module 1</div><div class="nav-title">Locate the Alias Email List</div></div></div>
+    <div class="nav-item" id="ni-2" onclick="goMod(2)"><div class="chk" id="chk-2"></div><div><div class="nav-num">Module 2</div><div class="nav-title">Identify the Client's WMS</div></div></div>
+    <div class="nav-item" id="ni-3" onclick="goMod(3)"><div class="chk" id="chk-3"></div><div><div class="nav-num">Module 3</div><div class="nav-title">Find the Shipping State</div></div></div>
+    <div class="nav-item" id="ni-4" onclick="goMod(4)"><div class="chk" id="chk-4"></div><div><div class="nav-num">Module 4</div><div class="nav-title">Create the Claims Email</div></div></div>
+    <div class="nav-item" id="ni-5" onclick="goMod(5)"><div class="chk" id="chk-5"></div><div><div class="nav-num">Module 5</div><div class="nav-title">Message Kaylynn in Slack</div></div></div>
+    <div class="nav-item" id="ni-6" onclick="goMod(6)"><div class="chk" id="chk-6"></div><div><div class="nav-num">Module 6</div><div class="nav-title">Update the WMS Google Sheet</div></div></div>
   </div>
   <div class="sb-foot">
     <div class="prog-lbl"><span>Course Progress</span><span id="prog-pct">0/6</span></div>
@@ -168,7 +135,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 
 <header id="topbar">
   <div class="logo-wrap">
-    <svg width="38" height="24" viewBox="0 0 42 26">
+    <svg width="36" height="22" viewBox="0 0 42 26">
       <polygon points="0,0 11,0 17,13 11,26 0,26 6,13" fill="#5EAEFF"/>
       <polygon points="12,0 23,0 29,13 23,26 12,26 18,13" fill="#3480CC"/>
       <polygon points="24,0 35,0 41,13 35,26 24,26 30,13" fill="#1B3A6B"/>
@@ -207,75 +174,50 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 
 <script>
 const F = 'Claims Email Setup Screenshots/';
-
 const MODULES = [
-  {
-    id:1, title:'Locate the Alias Email List',
-    sub:'Follow the steps below to find and open the shared alias email spreadsheet in Google Drive.',
-    steps:[
-      {title:'Open Slack',desc:'Launch Slack if it isn\'t already open.',img:F+'claims1.png'},
-      {title:'Open your VAP Onboarding Team chat',desc:'In your Slack sidebar under Starred, navigate to the <strong>vap-onboarding-team</strong> channel.',img:F+'claims1.png'},
-      {title:'Click the Google Drive links at the top',desc:'At the top of the VAP Onboarding Team chat you\'ll see posted Google Drive links — click one to open the shared folder.',img:F+'claims1.png'},
-      {title:'Open the Alias Email List',desc:'Find and open the <strong>Alias Email List</strong> from the Google Drive folder.',img:F+'claims1.png'},
-      {title:'Confirm spreadsheet access',desc:'You should now see the Google Sheets page with the shared email tracking spreadsheet. If you get a permissions error, contact Kaylynn Caldwell before proceeding.',img:F+'claims2.png'},
-    ]
-  },
-  {
-    id:2, title:'Identify the Client\'s WMS',
-    sub:'Check the correct tab in the spreadsheet, then find the WMS for your customer in Slack.',
-    steps:[
-      {title:'Open the "Alias for Claims Inbox" tab',desc:'At the bottom of the Google Sheets spreadsheet, click the tab labeled <strong>Alias for Claims Inbox</strong>. Make sure you are on this specific tab.',img:F+'claims2.png'},
-      {title:'Go to #closed-won-customers and find your customer',desc:'Open Slack and navigate to the <strong>#closed-won-customers</strong> channel. Find the HubSpot post for the customer you are setting this up for — we need to know the WMS for the email name we are creating.',img:F+'claims3.png'},
-    ]
-  },
-  {
-    id:3, title:'Find the Shipping State',
-    sub:'Open Outlook to find the onboarding PDF and note the state abbreviation for the email address.',
-    steps:[
-      {title:'Open Outlook',desc:'Open Microsoft Outlook.',img:F+'claims4.png'},
-      {title:'Open the onboarding email for this customer',desc:'Navigate to the <strong>Onboarding email inbox</strong> in the left sidebar and find the completed DocuSign email for the customer you are working on. Look for a subject line beginning with <strong>"Completed:"</strong> from DocuSign.',img:F+'claims4.png'},
-      {title:'Open the info PDF attachment',desc:'Inside that email, locate the <strong>3PL Onboarding Form</strong> PDF attachment and click it to preview. If there are two, open the one labeled v1.',img:F+'claims4.png'},
-      {title:'Note the state under Shipping Information',desc:'In the PDF preview, find the <strong>Shipping Information</strong> section. Look at the City, State, Zip code row and note the <strong>state abbreviation</strong> (e.g. MI). You will use this in the email address.',img:F+'claims5.png'},
-    ]
-  },
-  {
-    id:4, title:'Create the Claims Email Address',
-    sub:'Build the correctly formatted email address, then take an annotated screenshot to send to Kaylynn.',
-    steps:[
-      {title:'Create the email as shown below',desc:'Using the WMS, company name, and state you\'ve collected, construct the claims email address.<div class="format-box"><div class="format-lbl">📋 Email Format</div><div class="format-code">WMS-companyname-state-claims@idrivelogistics.com</div><div class="format-example">Example: Packiyo-Encore-MI-claims@idrivelogistics.com</div></div>',img:F+'claims6.png'},
-      {title:'Screenshot the change (Windows + Shift + S)',desc:'Press <strong>Windows + Shift + S</strong>. A snipping overlay appears — drag to capture the relevant area. The screenshot is automatically copied to your clipboard.',img:F+'claims6.png'},
-      {title:'Open the notification or notification center',desc:'Look at the bottom-right corner of your screen. Click the Snipping Tool notification, or open the notification center by clicking the clock/timestamp area.',img:F+'claims6a.png'},
-      {title:'Click the Snipping Tool notification',desc:'Click the notification to open your screenshot in the Snipping Tool editor.',img:F+'claims6a.png'},
-      {title:'Click the square and circle box icon',desc:'In the Snipping Tool toolbar, click the icon that looks like a square and circle box.',img:F+'claims7.png'},
-      {title:'Ensure the settings match the screenshot',desc:'Check that your Snipping Tool settings match what is shown on the right before continuing.',img:F+'claims8.png'},
-      {title:'Click and drag to create two boxes',desc:'Using the tool, click and drag to create two highlight boxes over the relevant fields — match the layout shown in the screenshot.',img:F+'claims8.png'},
-      {title:'Press Ctrl + C to copy',desc:'Press <strong>Ctrl + C</strong> to copy the annotated screenshot to your clipboard.',img:F+'claims8.png'},
-    ]
-  },
-  {
-    id:5, title:'Message Kaylynn in Slack',
-    sub:'Send Kaylynn a Slack DM with your annotated screenshot and the Google Sheet link.',
-    steps:[
-      {title:'Copy the Google Sheet link',desc:'Return to the Google Sheets page (the Alias Email List) and copy the URL from your browser address bar.',img:F+'claims9.png'},
-      {title:'Search Kaylynn Caldwell in Slack',desc:'In Slack, use the search bar at the top and type <strong>Kaylynn Caldwell</strong>.',img:F+'claims10.png'},
-      {title:'Click her name to start a private message',desc:'Click Kaylynn\'s name from the results to open a direct message conversation.',img:F+'claims10.png'},
-      {title:'Ctrl + V to paste the screenshot',desc:'Click in the message text box and press <strong>Ctrl + V</strong> to paste the annotated screenshot you copied earlier.',img:F+'claims10.png'},
-      {title:'Paste the Google Sheet link in the text box',desc:'Paste the sheet URL you copied into the message alongside the screenshot.',img:F+'claims10.png'},
-      {title:'Hold Ctrl + Enter to start a new line',desc:'Press <strong>Ctrl + Enter</strong> to add a new line without sending the message.',img:F+'claims10.png'},
-      {title:'Type your message and send',desc:'Type a message like the one below, then verify the link and screenshot are both present and click <strong>Send</strong>.<div class="format-box"><div class="format-lbl">💬 Suggested Message</div><div class="format-code" style="font-family:\'Inter\',sans-serif;font-style:italic">Good afternoon Kaylynn! Can you create this claims email when you have time? Thanks!</div></div>',img:F+'claims10.png'},
-    ]
-  },
-  {
-    id:6, title:'Update the WMS Google Sheet',
-    sub:'Log the new claims email in the WMS Onboarding tracking sheet, then proceed to Easypost setup.',
-    steps:[
-      {title:'Go back to the Alias Email List',desc:'Return to the Google Sheets spreadsheet (the Alias Email List).',img:F+'claims11.png'},
-      {title:'Ensure you are on the WMSOnboarding tab',desc:'Click the <strong>WMSOnboarding</strong> tab at the bottom of the spreadsheet — make sure you are NOT on the Alias for Claims Inbox tab.',img:F+'claims11.png'},
-      {title:'Note: use the next available email for this exercise',desc:'Because the example company is using Packiyo, we will use the next available email slot for this exercise — but you will be using whatever your company has.',img:F+'claims12.png'},
-      {title:'Add the business name to the next open spot',desc:'Find the next empty row and type the business name for the company you are onboarding.',img:F+'claims12.png'},
-      {title:'Proceed to Easypost setup',desc:'Now that we have assigned an email for this company, refer to the <strong>Easypost Training</strong> to get this specific email set up.<div class="warn"><div class="warn-lbl">📌 Remember</div><p>Because the email is <strong>WMSOnboarding@idrivelogistics.com</strong>, the verification code will come to the WMSOnboarding email in your Outlook. Ensure Kaylynn Caldwell has given you access to whatever onboarding emails you need.</p></div>',img:F+'claims12.png'},
-    ]
-  }
+  {id:1,title:'Locate the Alias Email List',steps:[
+    {title:'Open Slack',desc:'Launch Slack if it isn\'t already open.',img:F+'claims1.png'},
+    {title:'Open your VAP Onboarding Team chat',desc:'In your Slack sidebar under Starred, navigate to the <strong>vap-onboarding-team</strong> channel.',img:F+'claims1.png'},
+    {title:'Click the Google Drive links at the top',desc:'At the top of the VAP Onboarding Team chat you\'ll see posted Google Drive links — click one to open the shared folder.',img:F+'claims1.png'},
+    {title:'Open the Alias Email List',desc:'Find and open the <strong>Alias Email List</strong> from the Google Drive folder.',img:F+'claims1.png'},
+    {title:'Confirm spreadsheet access',desc:'You should now see the Google Sheets page with the shared email tracking spreadsheet. If you get a permissions error, contact Kaylynn Caldwell before proceeding.',img:F+'claims2.png'},
+  ]},
+  {id:2,title:'Identify the Client\'s WMS',steps:[
+    {title:'Open the "Alias for Claims Inbox" tab',desc:'At the bottom of the Google Sheets spreadsheet, click the tab labeled <strong>Alias for Claims Inbox</strong>. Make sure you are on this specific tab.',img:F+'claims2.png'},
+    {title:'Go to #closed-won-customers and find your customer',desc:'Open Slack and navigate to the <strong>#closed-won-customers</strong> channel. Find the HubSpot post for the customer you are setting this up for — we need to know the WMS for the email name we are creating.',img:F+'claims3.png'},
+  ]},
+  {id:3,title:'Find the Shipping State',steps:[
+    {title:'Open Outlook',desc:'Open Microsoft Outlook.',img:F+'claims4.png'},
+    {title:'Open the onboarding email for this customer',desc:'Navigate to the <strong>Onboarding email inbox</strong> in the left sidebar and find the completed DocuSign email for the customer you are working on. Look for a subject line beginning with <strong>"Completed:"</strong> from DocuSign.',img:F+'claims4.png'},
+    {title:'Open the info PDF attachment',desc:'Inside that email, locate the <strong>3PL Onboarding Form</strong> PDF attachment and click it to preview. If there are two, open the one labeled v1.',img:F+'claims4.png'},
+    {title:'Note the state under Shipping Information',desc:'In the PDF preview, find the <strong>Shipping Information</strong> section. Look at the City, State, Zip code row and note the <strong>state abbreviation</strong> (e.g. MI). You will use this in the email address.',img:F+'claims5.png'},
+  ]},
+  {id:4,title:'Create the Claims Email Address',steps:[
+    {title:'Create the email address',desc:'Using the WMS, company name, and state you\'ve collected, construct the claims email address.<div class="format-box"><div class="format-lbl">📋 Email Format</div><div class="format-code">WMS-companyname-state-claims@idrivelogistics.com</div><div class="format-example">Example: Packiyo-Encore-MI-claims@idrivelogistics.com</div></div>',img:F+'claims6.png'},
+    {title:'Screenshot the change (Windows + Shift + S)',desc:'Press <strong>Windows + Shift + S</strong>. A snipping overlay appears — drag to capture the relevant area. The screenshot is automatically copied to your clipboard.',img:F+'claims6.png'},
+    {title:'Open the Snipping Tool notification',desc:'Look at the bottom-right corner of your screen. Click the Snipping Tool notification, or open the notification center by clicking the clock/timestamp area.',img:F+'claims6a.png'},
+    {title:'Click the Snipping Tool notification to open the editor',desc:'Click the notification to open your screenshot in the Snipping Tool editor.',img:F+'claims6a.png'},
+    {title:'Click the square and circle box icon',desc:'In the Snipping Tool toolbar, click the icon that looks like a square and circle box.',img:F+'claims7.png'},
+    {title:'Ensure the settings match the screenshot',desc:'Check that your Snipping Tool settings match what is shown on the right before continuing.',img:F+'claims8.png'},
+    {title:'Click and drag to create two highlight boxes',desc:'Using the tool, click and drag to create two highlight boxes over the relevant fields — match the layout shown in the screenshot.',img:F+'claims8.png'},
+    {title:'Press Ctrl + C to copy the annotated screenshot',desc:'Press <strong>Ctrl + C</strong> to copy the annotated screenshot to your clipboard.',img:F+'claims8.png'},
+  ]},
+  {id:5,title:'Message Kaylynn in Slack',steps:[
+    {title:'Copy the Google Sheet link',desc:'Return to the Google Sheets page (the Alias Email List) and copy the URL from your browser address bar.',img:F+'claims9.png'},
+    {title:'Search Kaylynn Caldwell in Slack',desc:'In Slack, use the search bar at the top and type <strong>Kaylynn Caldwell</strong>.',img:F+'claims10.png'},
+    {title:'Click her name to open a direct message',desc:'Click Kaylynn\'s name from the results to open a direct message conversation.',img:F+'claims10.png'},
+    {title:'Paste the screenshot with Ctrl + V',desc:'Click in the message text box and press <strong>Ctrl + V</strong> to paste the annotated screenshot you copied earlier.',img:F+'claims10.png'},
+    {title:'Paste the Google Sheet link in the text box',desc:'Paste the sheet URL you copied into the message alongside the screenshot.',img:F+'claims10.png'},
+    {title:'Press Ctrl + Enter to start a new line',desc:'Press <strong>Ctrl + Enter</strong> to add a new line without sending the message.',img:F+'claims10.png'},
+    {title:'Type your message and send',desc:'Type a message like the one below, then verify the link and screenshot are both present and click <strong>Send</strong>.<div class="format-box"><div class="format-lbl">💬 Suggested Message</div><div class="format-code" style="font-family:\'Inter\',sans-serif;font-style:italic">Good afternoon Kaylynn! Can you create this claims email when you have time? Thanks!</div></div>',img:F+'claims10.png'},
+  ]},
+  {id:6,title:'Update the WMS Google Sheet',steps:[
+    {title:'Go back to the Alias Email List',desc:'Return to the Google Sheets spreadsheet (the Alias Email List).',img:F+'claims11.png'},
+    {title:'Click the WMSOnboarding tab',desc:'Click the <strong>WMSOnboarding</strong> tab at the bottom of the spreadsheet — make sure you are NOT on the Alias for Claims Inbox tab.',img:F+'claims11.png'},
+    {title:'Note: use the next available email for this exercise',desc:'Because the example company is using Packiyo, we will use the next available email slot for this exercise — but you will be using whatever your company has.',img:F+'claims12.png'},
+    {title:'Add the business name to the next open row',desc:'Find the next empty row and type the business name for the company you are onboarding.',img:F+'claims12.png'},
+    {title:'Proceed to Easypost setup',desc:'Now that we have assigned an email for this company, refer to the <strong>Easypost Training</strong> to get this specific email set up.<div class="warn"><div class="warn-lbl">📌 Remember</div><p>Because the email is <strong>WMSOnboarding@idrivelogistics.com</strong>, the verification code will come to the WMSOnboarding email in your Outlook. Ensure Kaylynn Caldwell has given you access to whatever onboarding emails you need.</p></div>',img:F+'claims12.png'},
+  ]},
 ];
 
 const MOD_LABELS={1:'Module 1 — Locate the Alias Email List',2:'Module 2 — Identify the Client\'s WMS',3:'Module 3 — Find the Shipping State',4:'Module 4 — Create the Claims Email',5:'Module 5 — Message Kaylynn in Slack',6:'Module 6 — Update the WMS Google Sheet'};
@@ -287,119 +229,104 @@ function buildMod(m){
   const mod=MODULES[m-1];
   const el=document.getElementById('mod-'+m);
   el.innerHTML=`
-    <div class="mod-header">
-      <div class="hot-tag">Claims Email Setup</div>
-      <h1 class="mod-title">${mod.title}</h1>
-      <p class="mod-sub">${mod.sub}</p>
+    <div class="instr-strip" id="instr-${m}">
+      <div class="instr-step-badge" id="instr-num-${m}">1</div>
+      <div class="instr-body">
+        <div class="instr-title" id="instr-title-${m}"></div>
+        <div class="instr-desc" id="instr-desc-${m}"></div>
+      </div>
+      <div class="instr-nav">
+        <div class="step-dots" id="dots-${m}"></div>
+        <button class="btn btn-ghost" id="prev-btn-${m}" onclick="prevStep(${m})">← Prev</button>
+        <button class="btn btn-primary" id="next-btn-${m}" onclick="nextStep(${m})">Next →</button>
+        <span class="instr-counter" id="step-ctr-${m}"></span>
+        <button class="btn btn-success" id="complete-btn-${m}" onclick="completeMod(${m})" style="display:none">${m===6?'Complete ✓':'Done & Continue →'}</button>
+      </div>
     </div>
-    <div class="content-row">
-      <div class="steps-col">
-        <div class="steps-scroll" id="steps-scroll-${m}"></div>
-        <div class="step-nav-row" id="nav-row-${m}"></div>
-      </div>
-      <div class="screenshot-col">
-        <div class="sf-card">
-          <div class="sf-header">
-            <div class="sf-dot" style="background:#ef4444"></div>
-            <div class="sf-dot" style="background:#f59e0b;margin-left:4px"></div>
-            <div class="sf-dot" style="background:#10b981;margin-left:4px"></div>
-            <div class="sf-title" id="sf-title-${m}">—</div>
-            <div class="sf-step-badge" id="sf-badge-${m}">Step 1 of ${mod.steps.length}</div>
-          </div>
-          <div class="sf-img-wrap" id="sf-wrap-${m}" onclick="openZoom(currentImg(${m}))">
-            <img id="sf-img-${m}" src="" alt="Screenshot" style="opacity:0">
-            <div class="zoom-hint">🔍 Click to enlarge</div>
-          </div>
-          <div class="sf-caption" id="sf-cap-${m}">Click a step on the left to see its reference screenshot.</div>
+    <div class="screenshot-area">
+      <div class="sf-card">
+        <div class="sf-header">
+          <div class="sf-dot" style="background:#ef4444"></div>
+          <div class="sf-dot" style="background:#f59e0b;margin-left:4px"></div>
+          <div class="sf-dot" style="background:#10b981;margin-left:4px"></div>
+          <div class="sf-filetitle" id="sf-title-${m}">—</div>
+          <div class="sf-step-badge" id="sf-badge-${m}">Step 1 of ${mod.steps.length}</div>
         </div>
+        <div class="sf-img-wrap" id="sf-wrap-${m}" onclick="openZoom(currentImg(${m}))">
+          <img id="sf-img-${m}" src="" alt="Screenshot" style="opacity:0">
+          <div class="zoom-hint">🔍 Click to enlarge</div>
+        </div>
+        <div class="sf-caption" id="sf-cap-${m}"></div>
       </div>
     </div>`;
-  renderSteps(m);
+  refreshStep(m);
 }
 
-function renderSteps(m){
+function refreshStep(m){
   const mod=MODULES[m-1];
-  const scroll=document.getElementById('steps-scroll-'+m);
-  const navRow=document.getElementById('nav-row-'+m);
-  let html='';
-  mod.steps.forEach((s,i)=>{
-    const active=i===modStep[m]?'active':'';
-    html+=`<div class="step-card ${active}" id="sc-${m}-${i}" onclick="gotoStep(${m},${i})">
-      <div class="step-num">${i+1}</div>
-      <div class="step-body">
-        <div class="step-title">${s.title}</div>
-        <div class="step-desc">${s.desc}</div>
-      </div>
-    </div>`;
-  });
-  scroll.innerHTML=html;
+  const step=modStep[m];
+  const s=mod.steps[step];
+  const total=mod.steps.length;
 
-  // Nav row
-  let nav='';
-  if(m>1) nav+=`<button class="btn btn-ghost btn-sm" onclick="goMod(${m-1})">← Back</button>`;
-  nav+=`<button class="btn btn-ghost btn-sm" id="prev-btn-${m}" onclick="prevStep(${m})">← Prev</button>`;
-  nav+=`<button class="btn btn-primary btn-sm" id="next-btn-${m}" onclick="nextStep(${m})">Next →</button>`;
-  nav+=`<span class="step-counter" id="step-ctr-${m}">1/${mod.steps.length}</span>`;
-  if(m===6) nav+=`<button class="btn btn-success btn-sm" onclick="completeMod(${m})">Complete ✓</button>`;
-  else nav+=`<button class="btn btn-primary btn-sm" id="complete-btn-${m}" onclick="completeMod(${m})" style="display:none">Done &amp; Continue →</button>`;
-  navRow.innerHTML=nav;
+  // Instruction strip
+  document.getElementById('instr-num-'+m).textContent=step+1;
+  document.getElementById('instr-title-'+m).textContent=s.title;
+  document.getElementById('instr-desc-'+m).innerHTML=s.desc;
 
-  // Scroll active step into view
-  const activeCard=document.getElementById('sc-'+m+'-'+modStep[m]);
-  if(activeCard) setTimeout(()=>activeCard.scrollIntoView({block:'nearest',behavior:'smooth'}),50);
+  // Dots
+  let dots='';
+  for(let i=0;i<total;i++){
+    const cls=i<step?'done':i===step?'active':'';
+    dots+=`<div class="step-dot ${cls}" onclick="gotoStep(${m},${i})" style="cursor:pointer" title="Step ${i+1}"></div>`;
+  }
+  document.getElementById('dots-'+m).innerHTML=dots;
 
-  updateScreenshot(m);
-  updateNavState(m);
-}
-
-function gotoStep(m,i){modStep[m]=i;renderSteps(m);}
-function prevStep(m){if(modStep[m]>0){modStep[m]--;renderSteps(m);}}
-function nextStep(m){if(modStep[m]<MODULES[m-1].steps.length-1){modStep[m]++;renderSteps(m);}}
-
-function updateNavState(m){
-  const total=MODULES[m-1].steps.length, step=modStep[m];
-  const p=document.getElementById('prev-btn-'+m);
-  const n=document.getElementById('next-btn-'+m);
-  const c=document.getElementById('step-ctr-'+m);
+  // Counter & buttons
+  document.getElementById('step-ctr-'+m).textContent=(step+1)+' / '+total;
+  const prev=document.getElementById('prev-btn-'+m);
+  const next=document.getElementById('next-btn-'+m);
   const cb=document.getElementById('complete-btn-'+m);
-  if(p) p.disabled=step===0;
-  if(n) n.disabled=step===total-1;
-  if(c) c.textContent=(step+1)+'/'+total;
-  if(cb) cb.style.display=step===total-1?'inline-flex':'none';
-}
+  prev.disabled=step===0;
+  next.disabled=step===total-1;
+  next.style.display=step===total-1?'none':'inline-flex';
+  cb.style.display=step===total-1?'inline-flex':'none';
 
-function updateScreenshot(m){
-  const s=MODULES[m-1].steps[modStep[m]];
+  // Screenshot
   const img=document.getElementById('sf-img-'+m);
-  const title=document.getElementById('sf-title-'+m);
-  const badge=document.getElementById('sf-badge-'+m);
-  const cap=document.getElementById('sf-cap-'+m);
-  if(title) title.textContent=s.title;
-  if(badge) badge.textContent='Step '+(modStep[m]+1)+' of '+MODULES[m-1].steps.length;
-  if(cap) cap.textContent=s.title;
+  const sfTitle=document.getElementById('sf-title-'+m);
+  const sfBadge=document.getElementById('sf-badge-'+m);
+  const sfCap=document.getElementById('sf-cap-'+m);
+  if(sfTitle) sfTitle.textContent=s.title;
+  if(sfBadge) sfBadge.textContent='Step '+(step+1)+' of '+total;
+  if(sfCap) sfCap.textContent=s.title;
   if(img&&s.img&&img.dataset.src!==s.img){
     img.dataset.src=s.img;
     img.style.opacity='0';
     img.src=s.img;
     img.onload=()=>{img.style.opacity='1';};
-    img.onerror=()=>{img.style.opacity='1';};
+    img.onerror=()=>{img.style.opacity='0.3';};
   }
 }
 
+function gotoStep(m,i){modStep[m]=i;refreshStep(m);}
+function prevStep(m){if(modStep[m]>0){modStep[m]--;refreshStep(m);}}
+function nextStep(m){if(modStep[m]<MODULES[m-1].steps.length-1){modStep[m]++;refreshStep(m);}}
 function currentImg(m){return MODULES[m-1].steps[modStep[m]].img;}
+
 function openZoom(src){document.getElementById('zoom-img').src=src;document.getElementById('zoom-overlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeZoom(){document.getElementById('zoom-overlay').classList.remove('open');document.body.style.overflow='';}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeZoom();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeZoom();return;}
+  if(e.key==='ArrowRight') nextStep(curMod);
+  if(e.key==='ArrowLeft') prevStep(curMod);
+});
 
 function goMod(id){
   document.querySelectorAll('.msec').forEach(s=>s.classList.remove('active'));
   document.getElementById('comp').style.display='none';
-  const sec=document.getElementById('mod-'+id);
-  if(sec) sec.classList.add('active');
-  curMod=id;
-  refreshSidebar();refreshTopbar();
+  document.getElementById('mod-'+id).classList.add('active');
+  curMod=id;refreshSidebar();refreshTopbar();
 }
-
 function completeMod(id){
   completed[id]=true;refreshSidebar();refreshProgress();
   if(id<6) goMod(id+1);
@@ -409,27 +336,23 @@ function completeMod(id){
     refreshTopbar();
   }
 }
-
 function refreshSidebar(){
   [1,2,3,4,5,6].forEach(m=>{
     const chk=document.getElementById('chk-'+m);
     const ni=document.getElementById('ni-'+m);
     if(!chk||!ni)return;
     chk.className='chk';ni.classList.remove('active');
-    if(completed[m]) chk.classList.add('done');
+    if(completed[m])chk.classList.add('done');
     else if(m===curMod){chk.classList.add('cur');ni.classList.add('active');}
   });
 }
 function refreshProgress(){
   const cnt=[1,2,3,4,5,6].filter(m=>completed[m]).length;
-  const fill=document.getElementById('prog-fill');
-  const pct=document.getElementById('prog-pct');
-  if(fill) fill.style.width=((cnt/6)*100)+'%';
-  if(pct) pct.textContent=cnt+'/6';
+  document.getElementById('prog-fill').style.width=((cnt/6)*100)+'%';
+  document.getElementById('prog-pct').textContent=cnt+'/6';
 }
 function refreshTopbar(){
-  const lbl=document.getElementById('topbar-label');
-  if(lbl) lbl.textContent=MOD_LABELS[curMod]||'Claims Email Setup';
+  document.getElementById('topbar-label').textContent=MOD_LABELS[curMod]||'Claims Email Setup';
 }
 function restartAll(){
   [1,2,3,4,5,6].forEach(m=>{completed[m]=false;modStep[m]=0;});
