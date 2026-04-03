@@ -438,30 +438,6 @@ strong{font-weight:700;color:#1e293b}
 </div></main>
 
 <script>
-// ── Image data ── Each entry: [src, title, caption]
-// Images are loaded from the user-uploaded files via their IDs.
-// We use a JS image loader that converts the uploaded blobs to data URLs.
-
-const IMGS = {
-  // Module 1: VAP onboarding Slack chat (Image 1 = setup channel view, good match)
-  m1_0: { title:'Slack — Setup Channel Overview', caption:'The setup channel shows the closed-won post with carrier info and WMS details — similar structure to the VAP Onboarding team chat with Drive links pinned at top.' },
-  // Module 2: closed-won-customers channel showing WMS: Packiyo (Image 2), and the closed-won channel WMS post (Image 1 bottom)
-  m2_0: { title:'Slack — #closed-won-customers', caption:'#closed-won-customers: find your client\'s HubSpot post, expand "Show less" to see the full details including WMS.' },
-  m2_1: { title:'Slack — WMS field highlighted', caption:'Locate the WMS field in the HubSpot post — e.g. WMS: Packiyo. Note this exact name for use in the email address.' },
-  // Module 3: Outlook inbox (Image 10), PDF open (Image 11)
-  m3_0: { title:'Outlook — Onboarding Inbox', caption:'Outlook: open the Onboarding inbox from the left sidebar → find the "Completed:" DocuSign email for your customer → click the v1 PDF attachment.' },
-  m3_1: { title:'Info PDF — Shipping Information', caption:'PDF preview: find the Shipping Information section at the top. Note the state abbreviation in the City, State, Zip code row (e.g. MI).' },
-  // Module 4: Snipping tool notification (Image 13), Snipping tool with highlights (Image 14)
-  m4_0: { title:'Snipping Tool — Notification', caption:'After pressing Windows+Shift+S and dragging your selection, a notification appears — click it to open the screenshot in the Snipping Tool editor.' },
-  m4_1: { title:'Snipping Tool — Annotate &amp; Copy', caption:'Use the highlighter icon (yellow marker) to highlight the relevant fields, then click the copy icon (top right) to copy the annotated screenshot to clipboard.' },
-  // Module 5: Slack DM (reuse Image 1 / Image 2 — best available; no DM screenshot in set)
-  m5_0: { title:'Slack — DM to Kaylynn Caldwell', caption:'Search for Kaylynn Caldwell in Slack → open DM → paste screenshot + sheet link + your message → verify both are present → Send.' },
-  // Module 6: WMS onboarding sheet — best represented by Image 1 (sheet-like view)
-  m6_0: { title:'Google Sheet — WMSOnboarding Tab', caption:'Switch to the WMSOnboarding tab at the bottom of the sheet → find the next empty row → add the business name to reserve the slot.' },
-};
-
-// Map module panels to image element IDs in the page
-// SF_CONFIG[mod] = array of {imgKey, title, caption}
 const SF_CONFIG = {
   1: [{ imgKey:'m1_0', title:'Slack — Setup Channel Overview', caption:'The setup channel shows the closed-won post structure. Your VAP Onboarding Team chat will have Google Drive links pinned at the top — click those to open the Alias Email List.' }],
   2: [
@@ -476,33 +452,21 @@ const SF_CONFIG = {
     { imgKey:'m4_0', title:'Snipping Tool notification', caption:'After pressing Windows+Shift+S and capturing your selection, click the Snipping Tool notification in the bottom-right corner to open the annotation editor.' },
     { imgKey:'m4_1', title:'Snipping Tool — Highlight &amp; Copy', caption:'Click the highlighter icon (yellow marker, top toolbar), highlight the key fields, then click the copy icon (top right, next to the floppy disk) to copy to clipboard.' }
   ],
-  5: [{ imgKey:'m5_0', title:'Slack — Closed-won reference', caption:'Search Kaylynn Caldwell in Slack → open DM → Ctrl+V to paste screenshot → paste sheet URL → Ctrl+Enter for new line → type message → Send.' }],
+  5: [{ imgKey:'m5_0', title:'Slack — DM to Kaylynn Caldwell', caption:'Search Kaylynn Caldwell in Slack → open DM → Ctrl+V to paste screenshot → paste sheet URL → Ctrl+Enter for new line → type message → Send.' }],
   6: [{ imgKey:'m6_0', title:'Google Sheet — WMSOnboarding tab', caption:'Return to the Google Sheet → click the WMSOnboarding tab at the bottom → find the next empty row → type the business name to reserve the slot.' }]
 };
 
-// Map imgKey → the user-uploaded image IDs (by upload order / content match)
-// Images uploaded (0-indexed): 0=setup channel, 1=closed-won WMS, 2=closed-won channel create, 
-// 3=create channel step2, 4=add people skip, 5=move to setups, 6=members modal search, 
-// 7=members added, 8=members 6 list, 9=outlook inbox, 10=pdf shipping info, 
-// 11=slack setup channel posted, 12=snipping tool notification, 13=snipping tool annotate
 const IMG_MAP = {
-  m1_0: 0,   // setup channel — best match for "what a Slack setup channel looks like"
-  m2_0: 1,   // closed-won-customers channel showing WMS: Packiyo
-  m2_1: 1,   // same image, second pip shows same screenshot (only 1 closed-won image)
-  m3_0: 9,   // Outlook inbox with DocuSign email
-  m3_1: 10,  // PDF preview with Shipping Information
-  m4_0: 12,  // Snipping tool notification popup
-  m4_1: 13,  // Snipping tool with highlighter and copy button
-  m5_0: 1,   // No DM screenshot — use closed-won as reference context
-  m6_0: 11,  // Setup channel with posted info — closest to sheet tracking concept
+  m1_0: 'Claims Email Setup Screenshots/claims1.png',
+  m2_0: 'Claims Email Setup Screenshots/claims2.png',
+  m2_1: 'Claims Email Setup Screenshots/claims3.png',
+  m3_0: 'Claims Email Setup Screenshots/claims9.png',
+  m3_1: 'Claims Email Setup Screenshots/claims10.png',
+  m4_0: 'Claims Email Setup Screenshots/claims11.png',
+  m4_1: 'Claims Email Setup Screenshots/claims12.png',
+  m5_0: 'Claims Email Setup Screenshots/claims4.png',
+  m6_0: 'Claims Email Setup Screenshots/claims5.png'
 };
-
-// Store base64 data URLs after encoding
-const imgCache = {};
-
-// The uploaded images come in as Blobs via the chat interface.
-// We'll use a fetch-based approach to load them by their relative URLs
-// since Claude's artifact environment provides them as uploadedImages[N].
 
 const sfSteps = {1:0,2:0,3:0,4:0,5:0,6:0};
 
@@ -527,20 +491,25 @@ function renderSF(mod) {
     dots.forEach((d, i) => d.classList.toggle('active', i === step));
   }
   if (img) {
-    const imgIdx = IMG_MAP[c.imgKey];
-    const cached = imgCache[imgIdx];
-    if (cached) {
+    const imgPath = IMG_MAP[c.imgKey];
+    if (imgPath) {
       img.style.opacity = '0';
-      setTimeout(() => { img.src = cached; img.style.opacity = '1'; }, 50);
+      img.src = imgPath;
+      img.onload = () => { img.style.opacity = '1'; };
+      img.onerror = () => {
+        img.style.display = 'none';
+        const wrap = document.getElementById('sf-img-' + mod);
+        if (wrap) wrap.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;padding:32px 20px;color:rgba(255,255,255,.5);min-height:200px;text-align:center;font-size:11px;line-height:1.6">Image not found.<br>Check folder name matches exactly.</div>';
+      };
     }
   }
 }
 
 function sfNav(mod, dir) {
   const cfg = SF_CONFIG[mod];
-  const next = sfSteps[mod] + dir;
-  if (next < 0 || next >= cfg.length) return;
-  sfSteps[mod] = next;
+  const nx = sfSteps[mod] + dir;
+  if (nx < 0 || nx >= cfg.length) return;
+  sfSteps[mod] = nx;
   renderSF(mod);
 }
 
@@ -549,7 +518,6 @@ function setSFStep(mod, step) {
   renderSF(mod);
 }
 
-// ── Course navigation ──
 const MODS = ['1','2','3','4','5','6'];
 let completed = {}; MODS.forEach(m => completed[m] = false);
 let curMod = '1';
@@ -606,62 +574,8 @@ function restartAll() {
   refreshProgress(); goMod('1');
 }
 
-// ── Load images from uploadedImages provided by Claude's artifact environment ──
-// The images uploaded in this conversation are accessible via window.uploadedImages
-// as an array of {id, dataUrl} objects in the order they were uploaded.
-async function loadImages() {
-  // Try to access images from the artifact's image store
-  if (window.uploadedImages && window.uploadedImages.length > 0) {
-    window.uploadedImages.forEach((img, i) => {
-      imgCache[i] = img.dataUrl || img.src || img;
-    });
-    MODS.forEach(m => renderSF(parseInt(m)));
-    return;
-  }
-
-  // Fallback: images are passed as <img> elements with data-upload-id attributes
-  // or via the imageData global that Claude's environment injects
-  if (window.imageData) {
-    Object.entries(window.imageData).forEach(([idx, url]) => {
-      imgCache[parseInt(idx)] = url;
-    });
-    MODS.forEach(m => renderSF(parseInt(m)));
-    return;
-  }
-
-  // Final fallback: render panels with placeholder message
-  MODS.forEach(m => {
-    const img = document.getElementById('sf-img-el-' + m);
-    if (img) {
-      img.style.display = 'none';
-      const wrap = document.getElementById('sf-img-' + m);
-      if (wrap) wrap.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;color:rgba(255,255,255,.5);gap:8px;min-height:200px;text-align:center"><div style="font-size:28px;opacity:.4">🖼️</div><div style="font-size:11px;line-height:1.6">To display screenshots,<br>save this file locally and<br>place your images in the<br>same folder, or use the<br>GitHub Pages method.</div></div>';
-    }
-    renderSF(parseInt(m));
-  });
-}
-
-// ── Init ──
+MODS.forEach(m => renderSF(parseInt(m)));
 goMod('1');
-loadImages();
 </script>
-
-<!-- 
-  ══════════════════════════════════════════════════════════════
-  TO HOST THIS FILE WITH IMAGES:
-
-  OPTION A — GitHub Pages (free, shareable link):
-  1. Go to github.com → New repository → name it "idrive-training"
-  2. Upload THIS html file
-  3. Settings → Pages → Source: main branch → Save
-  4. Your link: yourusername.github.io/idrive-training/claims_email_training.html
-
-  OPTION B — Add images directly to this file:
-  Replace each  imgCache[N] = "..."  below with your base64 images.
-  Use Windows PowerShell to convert: 
-    [Convert]::ToBase64String([IO.File]::ReadAllBytes("claims1.png"))
-  Then wrap as: data:image/png;base64,<output>
-  ══════════════════════════════════════════════════════════════
--->
 </body>
 </html>
