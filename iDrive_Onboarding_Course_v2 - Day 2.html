@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Enablement Onboarding – Session 2 | iDrive Logistics</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#F0F4FA;color:#1a2033;min-height:100vh;display:flex;flex-direction:column}
+.top-nav{background:#1B3A6B;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.18)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-text{color:#fff;font-weight:700;font-size:15px;line-height:1.2}
+.nav-logo-sub{color:#a8c4e8;font-size:10px;font-weight:400;display:block}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-progress-wrap{display:flex;align-items:center;gap:10px}
+.nav-progress-label{color:#a8c4e8;font-size:12px;white-space:nowrap;font-weight:600}
+.progress-bar-outer{width:150px;height:6px;background:rgba(255,255,255,0.18);border-radius:4px;overflow:hidden}
+.progress-bar-inner{height:100%;background:#5EAEFF;border-radius:4px;transition:width 0.4s ease}
+.app-shell{display:flex;margin-top:60px;min-height:calc(100vh - 60px)}
+.sidebar{width:240px;min-width:240px;background:#fff;border-right:1px solid #DDE3EF;padding:24px 0;position:fixed;top:60px;bottom:0;overflow-y:auto}
+.sidebar-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#7b8aa8;padding:0 20px 14px}
+.sidebar-item{display:flex;align-items:flex-start;gap:10px;padding:9px 20px;cursor:pointer;font-size:12px;color:#3a4a6a;border-left:3px solid transparent;transition:all 0.18s;line-height:1.35}
+.sidebar-item:hover{background:#f5f7fc}
+.sidebar-item.active{border-left-color:#1B3A6B;background:#eef2fa;color:#1B3A6B;font-weight:600}
+.sidebar-item.done{color:#7b8aa8}
+.sidebar-check{width:20px;height:20px;min-width:20px;border-radius:50%;border:2px solid #DDE3EF;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;transition:all 0.2s;color:#aab;margin-top:1px}
+.sidebar-item.active .sidebar-check{border-color:#1B3A6B;background:#1B3A6B;color:#fff}
+.sidebar-item.done .sidebar-check{border-color:#10B981;background:#10B981;color:#fff}
+.main{margin-left:240px;flex:1;padding:32px 44px;max-width:1100px}
+.module{display:none}.module.active{display:block}
+.module-tag{display:inline-block;background:#EBF3FF;color:#1B3A6B;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 12px;border-radius:20px;margin-bottom:10px}
+.module-title{font-size:26px;font-weight:800;color:#1B3A6B;margin-bottom:6px;line-height:1.2}
+.module-subtitle{font-size:14.5px;color:#5a6a8a;margin-bottom:20px;max-width:700px;line-height:1.6}
+.card{background:#fff;border:1px solid #DDE3EF;border-radius:12px;padding:22px 26px;margin-bottom:18px}
+.card h3{font-size:16px;font-weight:700;color:#1B3A6B;margin-bottom:12px;display:flex;align-items:center;gap:8px;line-height:1.3}
+.card p{font-size:13.5px;color:#3a4a6a;line-height:1.72;margin-bottom:10px}
+.card p:last-child{margin-bottom:0}
+.bullet-list{list-style:none;padding:0;margin:8px 0 0}
+.bullet-list li{font-size:13.5px;color:#3a4a6a;line-height:1.72;padding-left:20px;position:relative;margin-bottom:3px}
+.bullet-list li::before{content:'▸';color:#5EAEFF;position:absolute;left:0;font-size:12px;top:2px}
+.tip-box{background:#EBF3FF;border-left:4px solid #1B3A6B;border-radius:0 8px 8px 0;padding:13px 16px;margin-top:14px}
+.tip-box .tip-label{font-weight:700;color:#1B3A6B;font-size:12.5px;margin-bottom:4px}
+.tip-box p{font-size:13px;color:#3a4a6a;line-height:1.6;margin:0}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:4px}
+.card-grid-item{background:#f8faff;border:1px solid #DDE3EF;border-radius:8px;padding:13px 15px}
+.card-grid-item p{font-size:12.5px;font-weight:700;color:#1B3A6B;margin-bottom:6px}
+.card-grid-item .bullet-list li{font-size:12.5px}
+@media(max-width:720px){.card-grid{grid-template-columns:1fr}}
+.info-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12.5px}
+.info-table th{background:#EBF3FF;color:#1B3A6B;padding:9px 12px;text-align:left;font-weight:700;border:1px solid #DDE3EF}
+.info-table td{padding:9px 12px;border:1px solid #DDE3EF;color:#3a4a6a;vertical-align:top;line-height:1.5}
+.info-table tr:nth-child(even) td{background:#f8faff}
+.step-row{display:flex;align-items:flex-start;gap:16px;padding:12px 0;border-bottom:1px solid #f0f4fa}
+.step-row:last-child{border-bottom:none}
+.step-num{width:30px;height:30px;min-width:30px;border-radius:50%;background:#1B3A6B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-content strong{font-size:13.5px;color:#1B3A6B;display:block;margin-bottom:3px}
+.step-content span{font-size:13px;color:#5a6a8a;line-height:1.6}
+.module-nav{display:flex;justify-content:space-between;align-items:center;margin-top:28px;padding-top:22px;border-top:1px solid #DDE3EF}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:10px 22px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;transition:all 0.18s}
+.nav-btn.prev{background:#fff;color:#1B3A6B;border:1.5px solid #DDE3EF}
+.nav-btn.prev:hover{background:#f0f4fa}
+.nav-btn.next{background:#1B3A6B;color:#fff}
+.nav-btn.next:hover{background:#254e9a}
+.nav-btn:disabled{opacity:0.38;cursor:not-allowed}
+.quiz-card{background:#fff;border:1px solid #DDE3EF;border-radius:12px;padding:22px 26px;margin-bottom:16px}
+.quiz-q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7b8aa8;margin-bottom:6px}
+.quiz-q-text{font-size:14.5px;font-weight:700;color:#1B3A6B;margin-bottom:14px;line-height:1.45}
+.quiz-options{display:flex;flex-direction:column;gap:7px}
+.quiz-option{display:flex;align-items:center;gap:12px;padding:10px 15px;border:1.5px solid #DDE3EF;border-radius:8px;cursor:pointer;font-size:13px;color:#3a4a6a;transition:all 0.18s;line-height:1.4}
+.quiz-option:hover:not(.locked){background:#f5f7fc;border-color:#5EAEFF}
+.quiz-option.correct{border-color:#10B981;background:#f0fdf4;color:#065f46;font-weight:600}
+.quiz-option.wrong{border-color:#F43F5E;background:#fff1f2;color:#9f1239;font-weight:600}
+.quiz-option.reveal{border-color:#10B981;background:#f0fdf4;color:#065f46}
+.quiz-option.locked{cursor:default}
+.quiz-radio{width:17px;height:17px;min-width:17px;border-radius:50%;border:2px solid #DDE3EF;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+.quiz-option.correct .quiz-radio{border-color:#10B981;background:#10B981;color:#fff}
+.quiz-option.wrong .quiz-radio{border-color:#F43F5E;background:#F43F5E;color:#fff}
+.quiz-option.reveal .quiz-radio{border-color:#10B981;background:#10B981;color:#fff}
+.submit-quiz-btn{display:block;margin:22px auto 0;padding:12px 40px;background:#1B3A6B;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:background 0.2s}
+.submit-quiz-btn:hover:not(:disabled){background:#254e9a}
+.submit-quiz-btn:disabled{opacity:0.4;cursor:not-allowed}
+.quiz1-result{display:none;background:#f0fdf4;border-left:4px solid #10B981;border-radius:0 8px 8px 0;padding:14px 18px;margin-top:18px}
+.quiz1-result .tip-label{font-weight:700;color:#065f46;font-size:13px;margin-bottom:4px}
+.quiz1-result p{font-size:13px;color:#065f46;margin:0}
+.sub-tag{display:inline-block;background:#fff7ed;color:#c2410c;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;padding:3px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+.rebrand-badge{display:inline-block;background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle}
+
+/* Hands-On Training Screen */
+.hot-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:40px 20px}
+.hot-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:#5EAEFF;margin-bottom:14px}
+.hot-heading{font-size:30px;font-weight:800;color:#1B3A6B;margin-bottom:36px}
+.hot-list{list-style:none;display:flex;flex-direction:column;gap:16px;width:100%;max-width:480px}
+.hot-list li{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid #DDE3EF;border-radius:10px;padding:16px 22px;font-size:15px;font-weight:600;color:#1B3A6B;text-align:left}
+.hot-num{width:32px;height:32px;min-width:32px;border-radius:50%;background:#1B3A6B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <a class="nav-logo" href="#">
+    <svg width="44" height="30" viewBox="0 0 44 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,0 10,0 18,15 10,30 0,30 8,15" fill="#5EAEFF"/>
+      <polygon points="13,0 23,0 31,15 23,30 13,30 21,15" fill="#2E82D4"/>
+      <polygon points="26,0 36,0 44,15 36,30 26,30 34,15" fill="#1A5CAF"/>
+    </svg>
+    <span class="nav-logo-text">iDrive Logistics<span class="nav-logo-sub">Revenue Enablement Onboarding – Session 2</span></span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-progress-wrap">
+      <span class="nav-progress-label" id="progressLabel">Module 1 of 4</span>
+      <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar" style="width:20%"></div></div>
+    </div>
+  </div>
+</nav>
+
+<div class="app-shell">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Session 2 Modules</div>
+    <div class="sidebar-item active" id="sb-0" onclick="goTo(0)"><div class="sidebar-check" id="sc-0">1</div><span>Industry Lingo</span></div>
+    <div class="sidebar-item" id="sb-1" onclick="goTo(1)"><div class="sidebar-check" id="sc-1">1A</div><span>Lingo Knowledge Check</span></div>
+    <div class="sidebar-item" id="sb-2" onclick="goTo(2)"><div class="sidebar-check" id="sc-2">2</div><span>Onboarding Flow</span></div>
+    <div class="sidebar-item" id="sb-3" onclick="goTo(3)"><div class="sidebar-check" id="sc-3">3</div><span>Onboarding Flow Check</span></div>
+    <div class="sidebar-item" id="sb-4" onclick="goTo(4)"><div class="sidebar-check" id="sc-4">4</div><span>Hands on Training</span></div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ═══════════ MODULE 1 — INDUSTRY LINGO ═══════════ -->
+    <section class="module active" id="mod-0">
+      <div class="module-tag">Module 1</div>
+      <h1 class="module-title">Industry Lingo</h1>
+      <p class="module-subtitle">Before you can operate confidently at iDrive Logistics, you have to speak the language. This module covers the real terms, acronyms, and system names used every day across our team and with our 3PL partners.</p>
+
+      <div class="card">
+        <h3>🏢 Company &amp; Entity Names</h3>
+        <table class="info-table">
+          <thead><tr><th>Term</th><th>Full Name / Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><strong>iDrive / IDL</strong></td><td><strong>iDrive Logistics</strong> — what we go by. This is our brand and how we introduce ourselves to clients, carriers, and partners in every context.</td></tr>
+            <tr><td><strong>IDFTM</strong></td><td><strong>iDrive Fulfillment Transportation Management</strong> — our legal name as it appears on our W9 and formal financial/legal documents. Not used in day-to-day conversation.</td></tr>
+            <tr><td><strong>IDF</strong></td><td><strong>iDrive Fulfillment</strong> — a separate 3PL (warehouse that fulfills orders for clients). We own only a small portion of this company. <strong>We do not say we are iDrive Fulfillment</strong> — we are the logistics side only. Always identify yourself as iDrive Logistics.</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-box">
+          <div class="tip-label">⚠️ Identity Rule — Know This Cold</div>
+          <p>When speaking to anyone — clients, carriers, prospects, or partners — you are <strong>iDrive Logistics</strong>. Never introduce yourself as "iDrive Fulfillment." IDF is a related but distinct entity, and we are only a small stakeholder. Confusing the two creates legal, commercial, and reputational risk.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🖥️ Internal Systems &amp; Platforms</h3>
+        <table class="info-table">
+          <thead><tr><th>Term</th><th>Full Name / Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Kraken</strong></td><td>iDrive's internal TMS platform. Always referred to as "TMS" externally — <em>never</em> "Kraken."</td></tr>
+            <tr><td><strong>TMS</strong></td><td>Transportation Management System — manages shipping rates, carrier connections, label generation, and shipment history. Powered by Kraken.</td></tr>
+            <tr><td><strong>SMC / IIC</strong></td><td>Shipment Management/Contract system — where carrier contracts, billing accounts, and markups are configured. The billing source of truth. <span class="rebrand-badge">🔄 Being rebranded to IIC — iDrive Information Center</span></td></tr>
+            <tr><td><strong>EasyPost / EZYP</strong></td><td>Third-party multi-carrier API platform used to connect carrier accounts to the TMS for rating and label generation.</td></tr>
+            <tr><td><strong>NetSuite</strong></td><td>Accounting/ERP system used for financials and vendor payments. Requires DUO multi-factor authentication.</td></tr>
+            <tr><td><strong>HubSpot</strong></td><td>CRM system — used to track sales and closed-won customer data.</td></tr>
+            <tr><td><strong>Extensiv</strong></td><td>A WMS platform used by some 3PL partners. Also referenced in the context of a TMS integration. Previously known as 3PL Central.</td></tr>
+            <tr><td><strong>Zenventory / Zen</strong></td><td>A WMS platform used by some 3PL partners.</td></tr>
+            <tr><td><strong>Packiyo</strong></td><td>A WMS platform used by some 3PL partners.</td></tr>
+            <tr><td><strong>Logiwa</strong></td><td>A WMS platform used by some 3PL partners (e.g., 3PL Pros).</td></tr>
+            <tr><td><strong>ShipStation</strong></td><td>A WMS/shipping platform used by some 3PL partners.</td></tr>
+            <tr><td><strong>Deposco</strong></td><td>A WMS platform used by some 3PL partners.</td></tr>
+            <tr><td><strong>Trackstar</strong></td><td>A sync/integration tool that pulls inventory, products, and orders from a WMS (like Extensiv) into the TMS.</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-box">
+          <div class="tip-label">⚠️ External-Facing Rule</div>
+          <p>Always call the TMS "TMS" with clients — never "Kraken." Also note: <strong>SMC is being rebranded to IIC (iDrive Information Center)</strong> — you may hear both names during the transition period. Use IIC in all new documentation.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🏗️ Business Structure Terms</h3>
+        <table class="info-table">
+          <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><strong>3PL</strong></td><td>Third-Party Logistics provider — a warehouse/fulfillment company that ships on behalf of brands. iDrive's customers are often 3PLs.</td></tr>
+            <tr><td><strong>3PL Parent</strong></td><td>The top-level account representing a 3PL company (e.g., Gold3PL LLC, Warehouse Republic).</td></tr>
+            <tr><td><strong>Tenant</strong></td><td>A system-level account within the TMS/SMC (IIC) structure. 3PLs are set up as tenants; their brand clients are child tenants underneath them.</td></tr>
+            <tr><td><strong>Brand</strong></td><td>An individual e-commerce company that ships through a 3PL. Brands are the end clients of the 3PLs.</td></tr>
+            <tr><td><strong>BYOC / BYOCA</strong></td><td>Bring Your Own Carrier / Account — when a 3PL or brand connects their own carrier account to the TMS instead of using iDrive's accounts.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>📦 Carriers</h3>
+        <div class="card-grid">
+          <div class="card-grid-item">
+            <p>Major National Carriers</p>
+            <ul class="bullet-list">
+              <li><strong>UPS</strong> — United Parcel Service</li>
+              <li><strong>FedEx</strong> — Express, Ground, Home Delivery, 2Day, etc.</li>
+              <li><strong>USPS</strong> — United States Postal Service</li>
+              <li><strong>DHL eComm / DHLe</strong> — lower-cost domestic/international</li>
+              <li><strong>DHL Express</strong> — premium international carrier</li>
+              <li><strong>Amazon / AMZ</strong> — Amazon Shipping carrier service</li>
+            </ul>
+          </div>
+          <div class="card-grid-item">
+            <p>Regional &amp; Specialty Carriers</p>
+            <ul class="bullet-list">
+              <li><strong>GLS</strong> — General Logistics Systems, regional parcel</li>
+              <li><strong>OSM</strong> — OSM Worldwide, parcel carrier</li>
+              <li><strong>OnTrac</strong> — regional carrier, primarily Western US</li>
+              <li><strong>SpeedX</strong> — regional carrier</li>
+              <li><strong>EPG / ePost Global</strong> — international parcel</li>
+              <li><strong>Passport</strong> — international parcel carrier</li>
+              <li><strong>FlavorCloud</strong> — international parcel carrier</li>
+              <li><strong>DoorDash</strong> — regional carrier expanding into parcel delivery</li>
+              <li><strong>GOFO</strong> — regional carrier</li>
+            </ul>
+          </div>
+          <div class="card-grid-item">
+            <p>Freight &amp; Brokerage</p>
+            <ul class="bullet-list">
+              <li><strong>Ardent</strong> — LTL/TL freight carrier/broker</li>
+              <li><strong>GlobalTranz / GTZ</strong> — LTL freight carrier/broker</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🚚 Shipping &amp; Freight Terms</h3>
+        <table class="info-table">
+          <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><strong>LTL</strong></td><td>Less Than Truckload — freight that doesn't fill an entire truck; multiple shippers share space.</td></tr>
+            <tr><td><strong>TL / Truckload</strong></td><td>Full Truckload — a freight shipment that fills an entire truck.</td></tr>
+            <tr><td><strong>Parcel</strong></td><td>Individual package shipments (UPS, FedEx, USPS, etc.) as opposed to freight/pallets.</td></tr>
+            <tr><td><strong>BOL</strong></td><td>Bill of Lading — official shipping document accompanying freight/LTL/truckload shipments. Signed by the driver at pickup.</td></tr>
+            <tr><td><strong>eBOL</strong></td><td>Electronic Bill of Lading — a BOL submitted digitally through a carrier's portal.</td></tr>
+            <tr><td><strong>PRO Number</strong></td><td>A carrier-assigned tracking number for freight/LTL shipments.</td></tr>
+            <tr><td><strong>VRID</strong></td><td>Amazon-specific reference number required on BOLs for Amazon truckload pickups.</td></tr>
+            <tr><td><strong>Pallet</strong></td><td>A flat wooden platform used to stack and transport freight.</td></tr>
+            <tr><td><strong>Crossdock</strong></td><td>Inbound shipments transferred directly to outbound trucks with minimal warehousing.</td></tr>
+            <tr><td><strong>Manifest</strong></td><td>Closing out the day's shipments with a carrier. Generates the pickup BOL or closeout record.</td></tr>
+            <tr><td><strong>FCFS</strong></td><td>First Come, First Served — no set pickup appointment; drivers served in order of arrival.</td></tr>
+            <tr><td><strong>INTL</strong></td><td>International shipment.</td></tr>
+            <tr><td><strong>Hazmat</strong></td><td>Hazardous materials — packages with regulated substances. Require special carrier approvals.</td></tr>
+            <tr><td><strong>UN#</strong></td><td>UN Number — 4-digit code for hazardous materials. Required on SKUs and labels for hazmat shipments.</td></tr>
+            <tr><td><strong>Reefer</strong></td><td>Refrigerated truck/trailer for temperature-controlled freight.</td></tr>
+            <tr><td><strong>DAS</strong></td><td>Delivery Area Surcharge — additional fee for deliveries to rural or remote ZIP codes.</td></tr>
+            <tr><td><strong>Residential Surcharge</strong></td><td>Extra fee when delivering to a home address vs. a commercial address.</td></tr>
+            <tr><td><strong>Zone</strong></td><td>Shipping distance designation (1–8) used to calculate base freight rates.</td></tr>
+            <tr><td><strong>Dims / Dimensional Weight</strong></td><td>Calculated weight based on package size (L × W × H ÷ divisor) used when greater than actual weight.</td></tr>
+            <tr><td><strong>Rate Shop</strong></td><td>Comparing carrier rates to find the best price. The TMS does this automatically.</td></tr>
+            <tr><td><strong>Markup</strong></td><td>Percentage added on top of the carrier's base rate that iDrive charges clients. Configured in SMC/IIC.</td></tr>
+            <tr><td><strong>Contract</strong></td><td>A carrier account record in SMC/IIC linking a carrier account number to billing, rates, and markup settings.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>📊 Billing &amp; Reporting Terms</h3>
+        <table class="info-table">
+          <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><strong>PLD</strong></td><td>Parcel Level Detail — a shipment-level data report used for billing reconciliation.</td></tr>
+            <tr><td><strong>Unified PLD</strong></td><td>A combined PLD report across multiple accounts or 3PLs used for auditing charges.</td></tr>
+            <tr><td><strong>Invoice Reconciliation</strong></td><td>Comparing what a carrier billed iDrive against what the TMS shows was shipped, to catch discrepancies.</td></tr>
+            <tr><td><strong>CRID</strong></td><td>Customer Registration ID — a USPS identifier tied to the billing/postage account.</td></tr>
+            <tr><td><strong>MID</strong></td><td>Mailer ID — a USPS identifier assigned to each 3PL for USPS Direct API billing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>🏭 Warehouse &amp; Operations Terms</h3>
+        <table class="info-table">
+          <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><strong>WMS</strong></td><td>Warehouse Management System — software a 3PL uses to manage inventory, orders, and shipping.</td></tr>
+            <tr><td><strong>JIT</strong></td><td>Just-In-Time — refers to specific fulfillment locations operated by iDrive.</td></tr>
+            <tr><td><strong>JITM</strong></td><td>JIT Milpitas — iDrive's Just-In-Time fulfillment location in Milpitas, CA.</td></tr>
+            <tr><td><strong>JITR</strong></td><td>JIT Reno — iDrive's Just-In-Time fulfillment location in Reno, NV.</td></tr>
+            <tr><td><strong>SKU</strong></td><td>Stock Keeping Unit — a unique identifier for a specific product in a warehouse.</td></tr>
+            <tr><td><strong>Pickup Window</strong></td><td>Scheduled time range when a carrier arrives at a warehouse to collect packages or pallets.</td></tr>
+            <tr><td><strong>Placard</strong></td><td>A label placed on the outside of a pallet identifying the carrier, shipment info, or hazmat class.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>💬 Common Slack Abbreviations</h3>
+        <div class="card-grid">
+          <div class="card-grid-item">
+            <p>Company &amp; Systems</p>
+            <ul class="bullet-list">
+              <li><strong>IDF</strong> — iDrive Fulfillment</li>
+              <li><strong>EZYP</strong> — EasyPost</li>
+              <li><strong>SMC / IIC</strong> — Shipment Management/Contract (rebranding to IIC)</li>
+              <li><strong>TMS</strong> — Transportation Management System</li>
+              <li><strong>WMS</strong> — Warehouse Management System</li>
+              <li><strong>IDFTM</strong> — iDrive Fulfillment Transportation Management</li>
+            </ul>
+          </div>
+          <div class="card-grid-item">
+            <p>Shipping &amp; Operations</p>
+            <ul class="bullet-list">
+              <li><strong>BYOC / BYOCA</strong> — Bring Your Own Carrier / Account</li>
+              <li><strong>INTL</strong> — International</li>
+              <li><strong>LTL</strong> — Less Than Truckload</li>
+              <li><strong>TL</strong> — Truckload</li>
+              <li><strong>BOL</strong> — Bill of Lading</li>
+              <li><strong>FCFS</strong> — First Come, First Served</li>
+              <li><strong>DAS</strong> — Delivery Area Surcharge</li>
+              <li><strong>UN#</strong> — UN Hazmat Number</li>
+              <li><strong>SKU</strong> — Stock Keeping Unit</li>
+              <li><strong>PLD</strong> — Parcel Level Detail</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-label">💡 Pro Tip</div>
+          <p>When you see an unfamiliar abbreviation in Slack, ask a teammate privately rather than guessing in a client-facing channel. This glossary is a living document — flag any missing terms to the Billing or Onboarding team.</p>
+        </div>
+      </div>
+
+      <div class="module-nav">
+        <button class="nav-btn prev" disabled>← Previous</button>
+        <button class="nav-btn next" onclick="goTo(1)">Next: Lingo Check →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════ MODULE 1A — LINGO KNOWLEDGE CHECK ═══════════ -->
+    <section class="module" id="mod-1">
+      <div class="module-tag">Module 1A <span class="sub-tag">Knowledge Check</span></div>
+      <h1 class="module-title">Lingo Knowledge Check</h1>
+      <p class="module-subtitle">Quick check before moving on — make sure the core terms from Module 1 are locked in.</p>
+
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 1 of 5</div>
+        <div class="quiz-q-text">What is the brand name we use when identifying ourselves to clients, carriers, and partners?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q1a-0o0" onclick="selectOpt1(0,0,false)"><div class="quiz-radio"></div>IDFTM</div>
+          <div class="quiz-option" id="q1a-0o1" onclick="selectOpt1(0,1,false)"><div class="quiz-radio"></div>iDrive Fulfillment</div>
+          <div class="quiz-option" id="q1a-0o2" onclick="selectOpt1(0,2,true)"><div class="quiz-radio"></div>iDrive Logistics</div>
+          <div class="quiz-option" id="q1a-0o3" onclick="selectOpt1(0,3,false)"><div class="quiz-radio"></div>IDF</div>
+        </div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 2 of 5</div>
+        <div class="quiz-q-text">Which platform manages shipping rates, carrier connections, and label generation — and should always be called by this acronym externally, never "Kraken"?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q1a-1o0" onclick="selectOpt1(1,0,true)"><div class="quiz-radio"></div>TMS</div>
+          <div class="quiz-option" id="q1a-1o1" onclick="selectOpt1(1,1,false)"><div class="quiz-radio"></div>WMS</div>
+          <div class="quiz-option" id="q1a-1o2" onclick="selectOpt1(1,2,false)"><div class="quiz-radio"></div>ERP</div>
+          <div class="quiz-option" id="q1a-1o3" onclick="selectOpt1(1,3,false)"><div class="quiz-radio"></div>SMC/IIC</div>
+        </div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 3 of 5</div>
+        <div class="quiz-q-text">Which system does iDrive use for accounting, financials, and vendor payments — and requires DUO multi-factor authentication?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q1a-2o0" onclick="selectOpt1(2,0,false)"><div class="quiz-radio"></div>HubSpot</div>
+          <div class="quiz-option" id="q1a-2o1" onclick="selectOpt1(2,1,false)"><div class="quiz-radio"></div>EasyPost</div>
+          <div class="quiz-option" id="q1a-2o2" onclick="selectOpt1(2,2,true)"><div class="quiz-radio"></div>NetSuite</div>
+          <div class="quiz-option" id="q1a-2o3" onclick="selectOpt1(2,3,false)"><div class="quiz-radio"></div>Trackstar</div>
+        </div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 4 of 5</div>
+        <div class="quiz-q-text">What term describes a warehouse/fulfillment company that ships on behalf of brands — the type of company that makes up most of iDrive's customer base?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q1a-3o0" onclick="selectOpt1(3,0,false)"><div class="quiz-radio"></div>Brand</div>
+          <div class="quiz-option" id="q1a-3o1" onclick="selectOpt1(3,1,false)"><div class="quiz-radio"></div>Tenant</div>
+          <div class="quiz-option" id="q1a-3o2" onclick="selectOpt1(3,2,true)"><div class="quiz-radio"></div>3PL</div>
+          <div class="quiz-option" id="q1a-3o3" onclick="selectOpt1(3,3,false)"><div class="quiz-radio"></div>BYOC</div>
+        </div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 5 of 5</div>
+        <div class="quiz-q-text">Which of the following is a major national parcel carrier in iDrive's network?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q1a-4o0" onclick="selectOpt1(4,0,false)"><div class="quiz-radio"></div>Ardent</div>
+          <div class="quiz-option" id="q1a-4o1" onclick="selectOpt1(4,1,true)"><div class="quiz-radio"></div>UPS</div>
+          <div class="quiz-option" id="q1a-4o2" onclick="selectOpt1(4,2,false)"><div class="quiz-radio"></div>Extensiv</div>
+          <div class="quiz-option" id="q1a-4o3" onclick="selectOpt1(4,3,false)"><div class="quiz-radio"></div>Trackstar</div>
+        </div>
+      </div>
+
+      <button class="submit-quiz-btn" id="submitBtn1A" onclick="submitQuiz1A()" disabled>Submit Answers</button>
+      <div class="quiz1-result" id="quiz1-result">
+        <div class="tip-label" id="quiz1-result-label"></div>
+        <p id="quiz1-result-msg"></p>
+      </div>
+
+      <div class="module-nav">
+        <button class="nav-btn prev" onclick="goTo(0)">← Previous</button>
+        <button class="nav-btn next" id="btn-1a-next" onclick="goTo(2)" disabled>Next: Onboarding Flow →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════ MODULE 2 — ONBOARDING FLOW ═══════════ -->
+    <section class="module" id="mod-2">
+      <div class="module-tag">Module 2</div>
+      <h1 class="module-title">Onboarding Flow</h1>
+      <p class="module-subtitle">The step-by-step process for getting a new client from signed agreement to live and shipping on iDrive's platform.</p>
+
+      <div class="card">
+        <h3>🗺️ The iDrive Client Onboarding Journey</h3>
+        <div class="step-row"><div class="step-num">1</div><div class="step-content"><strong>Deal Closed — CRM Update</strong><span>Mark the deal "Closed Won" in HubSpot immediately. Update with contract value, service lines, and expected go-live date. Notify your team lead via Slack.</span></div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-content"><strong>Agreement Sent via DocuSign / PandaDoc</strong><span>Send the master service agreement and rate confirmation. Set a 24-hour follow-up task if not signed.</span></div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-content"><strong>Slack Channel Created</strong><span>Set up a dedicated client Slack channel (#client-[companyname]). Add the client contact, ops lead, and billing rep.</span></div></div>
+        <div class="step-row"><div class="step-num">4</div><div class="step-content"><strong>Account Configuration in EasyPost, SMC/IIC &amp; TMS</strong><span>Ops provisions the client's shipping account — carrier credentials, rate tables, markup settings, and label configurations are set up across EasyPost, SMC/IIC, and the TMS.</span></div></div>
+        <div class="step-row"><div class="step-num">5</div><div class="step-content"><strong>Integration Setup</strong><span>If the client has a WMS or e-commerce platform, the integration team begins the connector setup (Extensiv, ShipStation, Shopify, NetSuite, etc.).</span></div></div>
+      </div>
+
+      <div class="card">
+        <h3>📋 Onboarding Checklist</h3>
+
+        <!-- Flow Diagram SVG -->
+        <svg viewBox="0 0 620 300" width="100%" style="max-width:620px;display:block;margin:16px auto 4px" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowB" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#1B3A6B"/>
+            </marker>
+          </defs>
+
+          <!-- TOP LEFT: DocuSign / PandaDoc -->
+          <rect x="20" y="20" width="240" height="110" rx="12" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.8"/>
+          <!-- Document icon -->
+          <rect x="42" y="38" width="28" height="36" rx="3" fill="#fff" stroke="#1B3A6B" stroke-width="1.5"/>
+          <line x1="47" y1="50" x2="65" y2="50" stroke="#5EAEFF" stroke-width="1.5"/>
+          <line x1="47" y1="57" x2="65" y2="57" stroke="#5EAEFF" stroke-width="1.5"/>
+          <line x1="47" y1="64" x2="60" y2="64" stroke="#5EAEFF" stroke-width="1.5"/>
+          <!-- Pen icon -->
+          <line x1="62" y1="68" x2="72" y2="58" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+          <polygon points="72,55 76,57 74,61" fill="#1B3A6B"/>
+          <line x1="60" y1="70" x2="63" y2="67" stroke="#5EAEFF" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Text -->
+          <text x="90" y="55" font-family="Segoe UI,Arial" font-size="13" font-weight="800" fill="#1B3A6B">DocuSign /</text>
+          <text x="90" y="72" font-family="Segoe UI,Arial" font-size="13" font-weight="800" fill="#1B3A6B">PandaDoc</text>
+          <text x="90" y="91" font-family="Segoe UI,Arial" font-size="10.5" fill="#5a6a8a">Client agreements &amp; rate</text>
+          <text x="90" y="106" font-family="Segoe UI,Arial" font-size="10.5" fill="#5a6a8a">confirmations executed here</text>
+
+          <!-- ARROW TL → TR -->
+          <line x1="262" y1="75" x2="358" y2="75" stroke="#1B3A6B" stroke-width="2" marker-end="url(#arrowB)"/>
+
+          <!-- TOP RIGHT: Onboarding Setup -->
+          <rect x="360" y="20" width="240" height="110" rx="12" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.8"/>
+          <!-- Laptop icon -->
+          <rect x="382" y="43" width="34" height="22" rx="2" fill="#fff" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="379" y="65" width="40" height="5" rx="2" fill="#1B3A6B"/>
+          <line x1="385" y1="50" x2="411" y2="50" stroke="#5EAEFF" stroke-width="1.2"/>
+          <line x1="385" y1="56" x2="405" y2="56" stroke="#5EAEFF" stroke-width="1.2"/>
+          <!-- Text -->
+          <text x="432" y="48" font-family="Segoe UI,Arial" font-size="11.5" font-weight="800" fill="#1B3A6B">Onboarding Setup</text>
+          <text x="432" y="64" font-family="Segoe UI,Arial" font-size="10" fill="#5a6a8a">EZYP, SMC/IIC,</text>
+          <text x="432" y="78" font-family="Segoe UI,Arial" font-size="10" fill="#5a6a8a">NetSuite &amp; TMS</text>
+          <text x="432" y="98" font-family="Segoe UI,Arial" font-size="10" fill="#5a6a8a">Account provisioned</text>
+          <text x="432" y="113" font-family="Segoe UI,Arial" font-size="10" fill="#5a6a8a">&amp; configured by ops</text>
+
+          <!-- ARROW TR → BR (down) -->
+          <line x1="480" y1="132" x2="480" y2="168" stroke="#1B3A6B" stroke-width="2" marker-end="url(#arrowB)"/>
+
+          <!-- BOTTOM RIGHT: Request Carrier Accounts -->
+          <rect x="360" y="170" width="240" height="110" rx="12" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.8"/>
+          <!-- Box/package icon -->
+          <polygon points="397,215 383,207 383,228 397,236" fill="#fff" stroke="#1B3A6B" stroke-width="1.4"/>
+          <polygon points="397,215 411,207 411,228 397,236" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.4"/>
+          <polygon points="383,207 397,199 411,207 397,215" fill="#fff" stroke="#1B3A6B" stroke-width="1.4"/>
+          <!-- Label on top of box -->
+          <rect x="387" y="193" width="20" height="12" rx="2" fill="#5EAEFF" stroke="#1B3A6B" stroke-width="1"/>
+          <line x1="390" y1="197" x2="404" y2="197" stroke="#fff" stroke-width="1"/>
+          <line x1="390" y1="201" x2="401" y2="201" stroke="#fff" stroke-width="1"/>
+          <!-- Text -->
+          <text x="425" y="200" font-family="Segoe UI,Arial" font-size="12" font-weight="800" fill="#1B3A6B">Request Carrier</text>
+          <text x="425" y="216" font-family="Segoe UI,Arial" font-size="12" font-weight="800" fill="#1B3A6B">Accounts</text>
+          <text x="425" y="237" font-family="Segoe UI,Arial" font-size="10" fill="#5a6a8a">FedEx, UPS, USPS, DHL</text>
+          <text x="425" y="251" font-family="Segoe UI,Arial" font-size="10" fill="#5a6a8a">accounts requested &amp; added</text>
+
+          <!-- ARROW BR → BL (left) -->
+          <line x1="358" y1="225" x2="262" y2="225" stroke="#1B3A6B" stroke-width="2" marker-end="url(#arrowB)"/>
+
+          <!-- BOTTOM LEFT: Technical Integration -->
+          <rect x="20" y="170" width="240" height="110" rx="12" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.8"/>
+          <!-- Laptop 1 -->
+          <rect x="35" y="200" width="24" height="16" rx="2" fill="#fff" stroke="#1B3A6B" stroke-width="1.3"/>
+          <rect x="33" y="216" width="28" height="4" rx="1.5" fill="#1B3A6B"/>
+          <!-- Arrow between laptops -->
+          <line x1="64" y1="209" x2="76" y2="209" stroke="#5EAEFF" stroke-width="1.8" marker-end="url(#arrowB)"/>
+          <!-- Laptop 2 -->
+          <rect x="78" y="200" width="24" height="16" rx="2" fill="#fff" stroke="#1B3A6B" stroke-width="1.3"/>
+          <rect x="76" y="216" width="28" height="4" rx="1.5" fill="#1B3A6B"/>
+          <!-- Arrow to printer -->
+          <line x1="107" y1="209" x2="119" y2="209" stroke="#5EAEFF" stroke-width="1.8" marker-end="url(#arrowB)"/>
+          <!-- Printer icon -->
+          <rect x="121" y="203" width="22" height="16" rx="2" fill="#fff" stroke="#1B3A6B" stroke-width="1.3"/>
+          <rect x="125" y="197" width="14" height="7" rx="1" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.2"/>
+          <rect x="125" y="213" width="14" height="8" rx="1" fill="#f0f4fa" stroke="#1B3A6B" stroke-width="1"/>
+          <circle cx="138" cy="208" r="2" fill="#5EAEFF"/>
+          <!-- Text -->
+          <text x="36" y="242" font-family="Segoe UI,Arial" font-size="12" font-weight="800" fill="#1B3A6B">Technical Integration</text>
+          <text x="36" y="258" font-family="Segoe UI,Arial" font-size="10" fill="#5a6a8a">WMS / ERP connected</text>
+          <text x="36" y="272" font-family="Segoe UI,Arial" font-size="10" fill="#5a6a8a">to TMS for label printing</text>
+        </svg>
+      </div>
+
+      <div class="module-nav">
+        <button class="nav-btn prev" onclick="goTo(1)">← Previous</button>
+        <button class="nav-btn next" onclick="goTo(3)">Next: Flow Knowledge Check →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════ MODULE 3 — ONBOARDING FLOW KNOWLEDGE CHECK ═══════════ -->
+    <section class="module" id="mod-3">
+      <div class="module-tag">Module 3 <span class="sub-tag">Knowledge Check</span></div>
+      <h1 class="module-title">Onboarding Flow Check</h1>
+      <p class="module-subtitle">Use the reference diagram below to answer all 5 questions. Test how well you know the onboarding checklist flow from Module 2.</p>
+
+      <!-- Reference Diagram -->
+      <div class="card">
+        <h3>📋 Reference: The Onboarding Checklist Flow</h3>
+        <svg viewBox="0 0 590 210" width="100%" style="max-width:590px;display:block;margin:14px auto 4px" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowRef" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#1B3A6B"/>
+            </marker>
+          </defs>
+          <!-- Box 1 TL: DocuSign/PandaDoc -->
+          <rect x="10" y="15" width="200" height="72" rx="10" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.8"/>
+          <circle cx="29" cy="33" r="12" fill="#1B3A6B"/>
+          <text x="29" y="37.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="800" font-family="Segoe UI,Arial">1</text>
+          <text x="115" y="44" text-anchor="middle" fill="#1B3A6B" font-size="12.5" font-weight="800" font-family="Segoe UI,Arial">DocuSign / PandaDoc</text>
+          <text x="115" y="61" text-anchor="middle" fill="#5a6a8a" font-size="10.5" font-family="Segoe UI,Arial">Sign agreements &amp;</text>
+          <text x="115" y="76" text-anchor="middle" fill="#5a6a8a" font-size="10.5" font-family="Segoe UI,Arial">rate confirmations</text>
+          <!-- Arrow 1→2 -->
+          <line x1="212" y1="51" x2="368" y2="51" stroke="#1B3A6B" stroke-width="2" marker-end="url(#arrowRef)"/>
+          <!-- Box 2 TR: Onboarding Setup -->
+          <rect x="370" y="15" width="210" height="72" rx="10" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.8"/>
+          <circle cx="389" cy="33" r="12" fill="#1B3A6B"/>
+          <text x="389" y="37.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="800" font-family="Segoe UI,Arial">2</text>
+          <text x="475" y="40" text-anchor="middle" fill="#1B3A6B" font-size="12" font-weight="800" font-family="Segoe UI,Arial">Onboarding Setup</text>
+          <text x="475" y="56" text-anchor="middle" fill="#5a6a8a" font-size="10.5" font-family="Segoe UI,Arial">EZYP, SMC/IIC,</text>
+          <text x="475" y="71" text-anchor="middle" fill="#5a6a8a" font-size="10.5" font-family="Segoe UI,Arial">NetSuite &amp; TMS</text>
+          <!-- Arrow 2→3 down -->
+          <line x1="475" y1="89" x2="475" y2="123" stroke="#1B3A6B" stroke-width="2" marker-end="url(#arrowRef)"/>
+          <!-- Box 3 BR: Request Carrier Accounts -->
+          <rect x="370" y="125" width="210" height="72" rx="10" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.8"/>
+          <circle cx="389" cy="143" r="12" fill="#1B3A6B"/>
+          <text x="389" y="147.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="800" font-family="Segoe UI,Arial">3</text>
+          <text x="475" y="150" text-anchor="middle" fill="#1B3A6B" font-size="12.5" font-weight="800" font-family="Segoe UI,Arial">Request Carrier</text>
+          <text x="475" y="166" text-anchor="middle" fill="#1B3A6B" font-size="12.5" font-weight="800" font-family="Segoe UI,Arial">Accounts</text>
+          <text x="475" y="183" text-anchor="middle" fill="#5a6a8a" font-size="10.5" font-family="Segoe UI,Arial">FedEx, UPS, USPS, DHL, etc.</text>
+          <!-- Arrow 3→4 left -->
+          <line x1="368" y1="161" x2="212" y2="161" stroke="#1B3A6B" stroke-width="2" marker-end="url(#arrowRef)"/>
+          <!-- Box 4 BL: Technical Integration -->
+          <rect x="10" y="125" width="200" height="72" rx="10" fill="#EBF3FF" stroke="#1B3A6B" stroke-width="1.8"/>
+          <circle cx="29" cy="143" r="12" fill="#1B3A6B"/>
+          <text x="29" y="147.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="800" font-family="Segoe UI,Arial">4</text>
+          <text x="115" y="155" text-anchor="middle" fill="#1B3A6B" font-size="12.5" font-weight="800" font-family="Segoe UI,Arial">Technical Integration</text>
+          <text x="115" y="172" text-anchor="middle" fill="#5a6a8a" font-size="10.5" font-family="Segoe UI,Arial">WMS / ERP connected</text>
+          <text x="115" y="187" text-anchor="middle" fill="#5a6a8a" font-size="10.5" font-family="Segoe UI,Arial">to TMS for label printing</text>
+        </svg>
+      </div>
+
+      <!-- Q1 -->
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 1 of 5</div>
+        <div class="quiz-q-text">What is the FIRST step in the iDrive onboarding checklist flow?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q3-0o0" onclick="selectOB(0,0,false)"><div class="quiz-radio"></div>Request Carrier Accounts</div>
+          <div class="quiz-option" id="q3-0o1" onclick="selectOB(0,1,false)"><div class="quiz-radio"></div>Technical Integration</div>
+          <div class="quiz-option" id="q3-0o2" onclick="selectOB(0,2,true)"><div class="quiz-radio"></div>DocuSign / PandaDoc</div>
+          <div class="quiz-option" id="q3-0o3" onclick="selectOB(0,3,false)"><div class="quiz-radio"></div>Onboarding Setup in EZYP, SMC &amp; TMS</div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 2 of 5</div>
+        <div class="quiz-q-text">After DocuSign / PandaDoc is complete, what is the NEXT step in the flow?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q3-1o0" onclick="selectOB(1,0,false)"><div class="quiz-radio"></div>Technical Integration</div>
+          <div class="quiz-option" id="q3-1o1" onclick="selectOB(1,1,false)"><div class="quiz-radio"></div>Request Carrier Accounts</div>
+          <div class="quiz-option" id="q3-1o2" onclick="selectOB(1,2,false)"><div class="quiz-radio"></div>Slack Channel Created</div>
+          <div class="quiz-option" id="q3-1o3" onclick="selectOB(1,3,true)"><div class="quiz-radio"></div>Onboarding Setup in EZYP, SMC/IIC, NetSuite &amp; TMS</div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 3 of 5</div>
+        <div class="quiz-q-text">Which systems are configured during the "Onboarding Setup" step?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q3-2o0" onclick="selectOB(2,0,false)"><div class="quiz-radio"></div>HubSpot, Slack, and DocuSign</div>
+          <div class="quiz-option" id="q3-2o1" onclick="selectOB(2,1,true)"><div class="quiz-radio"></div>EZYP, SMC/IIC, NetSuite &amp; TMS</div>
+          <div class="quiz-option" id="q3-2o2" onclick="selectOB(2,2,false)"><div class="quiz-radio"></div>WMS, ERP, and Shopify only</div>
+          <div class="quiz-option" id="q3-2o3" onclick="selectOB(2,3,false)"><div class="quiz-radio"></div>FedEx, UPS, and USPS portals</div>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 4 of 5</div>
+        <div class="quiz-q-text">After Onboarding Setup is complete, what comes NEXT in the flow?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q3-3o0" onclick="selectOB(3,0,false)"><div class="quiz-radio"></div>DocuSign / PandaDoc</div>
+          <div class="quiz-option" id="q3-3o1" onclick="selectOB(3,1,false)"><div class="quiz-radio"></div>Technical Integration</div>
+          <div class="quiz-option" id="q3-3o2" onclick="selectOB(3,2,true)"><div class="quiz-radio"></div>Request Carrier Accounts</div>
+          <div class="quiz-option" id="q3-3o3" onclick="selectOB(3,3,false)"><div class="quiz-radio"></div>Deal Closed in HubSpot</div>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question 5 of 5</div>
+        <div class="quiz-q-text">What is the FINAL step in the onboarding checklist flow?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" id="q3-4o0" onclick="selectOB(4,0,false)"><div class="quiz-radio"></div>Request Carrier Accounts</div>
+          <div class="quiz-option" id="q3-4o1" onclick="selectOB(4,1,false)"><div class="quiz-radio"></div>Onboarding Setup in EZYP</div>
+          <div class="quiz-option" id="q3-4o2" onclick="selectOB(4,2,false)"><div class="quiz-radio"></div>DocuSign / PandaDoc</div>
+          <div class="quiz-option" id="q3-4o3" onclick="selectOB(4,3,true)"><div class="quiz-radio"></div>Technical Integration</div>
+        </div>
+      </div>
+
+      <button class="submit-quiz-btn" id="submitBtnOB" onclick="submitOB()" disabled>Submit Answers</button>
+      <div class="quiz1-result" id="quiz-ob-result">
+        <div class="tip-label" id="quiz-ob-label"></div>
+        <p id="quiz-ob-msg"></p>
+      </div>
+
+      <div class="module-nav">
+        <button class="nav-btn prev" onclick="goTo(2)">← Previous</button>
+        <button class="nav-btn next" id="btn-ob-next" onclick="goTo(4)" disabled>Next: Hands on Training →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════ MODULE 4 — HANDS ON TRAINING ═══════════ -->
+    <section class="module" id="mod-4">
+      <div class="module-tag">Module 4</div>
+      <h1 class="module-title">Hands on Training</h1>
+
+      <div class="hot-screen">
+        <div class="hot-title">Today We Will</div>
+        <div class="hot-heading">Let's Get to Work 🛠️</div>
+        <ul class="hot-list">
+          <li><div class="hot-num">1</div>Create an EasyPost Account</li>
+          <li><div class="hot-num">2</div>Request a FedEx Account</li>
+          <li><div class="hot-num">3</div>Add a FedEx Account to EasyPost</li>
+          <li><div class="hot-num">4</div>Add a FedEx Account to SMC</li>
+        </ul>
+      </div>
+
+      <div class="module-nav">
+        <button class="nav-btn prev" onclick="goTo(3)">← Previous</button>
+        <button class="nav-btn next" onclick="markComplete()" id="finishBtn">Mark Complete ✓</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+let currentIdx = 0;
+const modLabels = [
+  'Module 1 of 4',
+  '1A — Lingo Check',
+  'Module 2 of 4',
+  'Module 3 of 4',
+  'Module 4 of 4'
+];
+
+function goTo(idx) {
+  document.getElementById('mod-' + currentIdx).classList.remove('active');
+  document.getElementById('sb-'  + currentIdx).classList.remove('active');
+  if (idx > currentIdx && currentIdx !== 1) {
+    document.getElementById('sb-' + currentIdx).classList.add('done');
+    document.getElementById('sc-' + currentIdx).textContent = '✓';
+  }
+  currentIdx = idx;
+  document.getElementById('mod-' + idx).classList.add('active');
+  document.getElementById('sb-'  + idx).classList.add('active');
+  const pct = ((idx + 1) / 5) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = modLabels[idx];
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function markComplete() {
+  document.getElementById('sb-4').classList.add('done');
+  document.getElementById('sc-4').textContent = '✓';
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressLabel').textContent = 'Complete! 🎉';
+  const btn = document.getElementById('finishBtn');
+  btn.textContent = '✓ Completed';
+  btn.style.background = '#10B981';
+  btn.onclick = null;
+  btn.style.cursor = 'default';
+}
+
+// ── ONBOARDING FLOW QUIZ (Module 3) ────────
+const quizOBAns  = [null,null,null,null,null];
+const quizOBCorr = [2,3,1,2,3];
+const quizOBLock = [false,false,false,false,false];
+
+function selectOB(qIdx, optIdx, isCorrect) {
+  if (quizOBLock[qIdx]) return;
+  quizOBLock[qIdx] = true;
+  quizOBAns[qIdx]  = optIdx;
+  const correct = quizOBCorr[qIdx];
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('q3-' + qIdx + 'o' + i);
+    if (!el) continue;
+    el.classList.add('locked');
+    if (i === optIdx && isCorrect)  { el.classList.add('correct'); el.querySelector('.quiz-radio').textContent = '✓'; }
+    if (i === optIdx && !isCorrect) { el.classList.add('wrong');   el.querySelector('.quiz-radio').textContent = '✕'; }
+    if (i === correct && !isCorrect){ el.classList.add('reveal');  el.querySelector('.quiz-radio').textContent = '✓'; }
+  }
+  if (quizOBAns.every(a => a !== null)) document.getElementById('submitBtnOB').disabled = false;
+}
+
+function submitOB() {
+  let score = 0;
+  for (let i = 0; i < 5; i++) if (quizOBAns[i] === quizOBCorr[i]) score++;
+  document.getElementById('quiz-ob-result').style.display = 'block';
+  if (score === 5) {
+    document.getElementById('quiz-ob-label').textContent = '✅ Perfect — 5 / 5!';
+    document.getElementById('quiz-ob-msg').textContent = "You know the onboarding flow cold. That's the foundation of every smooth client launch.";
+  } else if (score >= 3) {
+    document.getElementById('quiz-ob-label').textContent = '👍 Good work — ' + score + ' / 5';
+    document.getElementById('quiz-ob-msg').textContent = "Solid understanding of the flow. Review the diagram in Module 2 for any steps you missed.";
+  } else {
+    document.getElementById('quiz-ob-label').textContent = '📖 Review needed — ' + score + ' / 5';
+    document.getElementById('quiz-ob-msg').textContent = "Head back to Module 2 and study the Onboarding Checklist flow diagram before continuing.";
+  }
+  document.getElementById('submitBtnOB').disabled = true;
+  document.getElementById('btn-ob-next').disabled = false;
+  document.getElementById('sb-3').classList.add('done');
+  document.getElementById('sc-3').textContent = '✓';
+}
+
+// ── MODULE 1A QUIZ ──────────────────────────
+const quiz1Answers = [null,null,null,null,null];
+const quiz1Correct = [2,0,2,2,1];
+const quiz1Locked  = [false,false,false,false,false];
+
+function selectOpt1(qIdx, optIdx, isCorrect) {
+  if (quiz1Locked[qIdx]) return;
+  quiz1Locked[qIdx]  = true;
+  quiz1Answers[qIdx] = optIdx;
+  const correct = quiz1Correct[qIdx];
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('q1a-' + qIdx + 'o' + i);
+    if (!el) continue;
+    el.classList.add('locked');
+    if (i === optIdx && isCorrect)  { el.classList.add('correct'); el.querySelector('.quiz-radio').textContent = '✓'; }
+    if (i === optIdx && !isCorrect) { el.classList.add('wrong');   el.querySelector('.quiz-radio').textContent = '✕'; }
+    if (i === correct && !isCorrect){ el.classList.add('reveal');  el.querySelector('.quiz-radio').textContent = '✓'; }
+  }
+  if (quiz1Answers.every(a => a !== null)) document.getElementById('submitBtn1A').disabled = false;
+}
+
+function submitQuiz1A() {
+  let score = 0;
+  for (let i = 0; i < 5; i++) if (quiz1Answers[i] === quiz1Correct[i]) score++;
+  const res = document.getElementById('quiz1-result');
+  const lbl = document.getElementById('quiz1-result-label');
+  const msg = document.getElementById('quiz1-result-msg');
+  res.style.display = 'block';
+  if (score === 5) {
+    lbl.textContent = '✅ Perfect — 5 / 5!';
+    msg.textContent = 'You nailed the lingo. Carry these terms with you into every conversation.';
+  } else if (score >= 3) {
+    lbl.textContent = '👍 Good work — ' + score + ' / 5';
+    msg.textContent = 'Solid grasp of the core terms. Review any you missed in Module 1 before moving on.';
+  } else {
+    lbl.textContent = '📖 Keep studying — ' + score + ' / 5';
+    msg.textContent = 'We recommend revisiting the Module 1 glossary tables. The terminology comes up in every module ahead.';
+  }
+  document.getElementById('submitBtn1A').disabled = true;
+  document.getElementById('btn-1a-next').disabled = false;
+  document.getElementById('sb-1').classList.add('done');
+  document.getElementById('sc-1').textContent = '✓';
+}
+</script>
+</body>
+</html>
