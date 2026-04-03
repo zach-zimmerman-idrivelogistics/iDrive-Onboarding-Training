@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claims Email Setup | iDrive Logistics Revenue Enablement</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1B3A6B;--accent:#5EAEFF;--green:#10B981;--bg:#F0F4FA;--sw:278px;--th:66px;--text:#1e293b;--muted:#64748b}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+#sidebar{position:fixed;top:0;left:0;width:var(--sw);height:100vh;background:var(--navy);display:flex;flex-direction:column;z-index:300;overflow-y:auto}
+.sb-head{padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sb-badge{background:rgba(94,174,255,.18);color:var(--accent);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.sb-course-title{color:#fff;font-size:13px;font-weight:600;line-height:1.4}
+.sb-nav{padding:14px 10px;flex:1}
+.nav-label{color:rgba(255,255,255,.4);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:0 8px;margin-bottom:8px}
+.nav-item{display:flex;align-items:flex-start;gap:10px;padding:9px 8px;border-radius:8px;cursor:pointer;transition:background .15s;margin-bottom:2px}
+.nav-item:hover{background:rgba(255,255,255,.07)}
+.nav-item.active{background:rgba(94,174,255,.15)}
+.chk{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .2s}
+.chk.done{background:var(--green);border-color:var(--green)}
+.chk.done::after{content:'';width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block}
+.chk.cur{border-color:var(--accent)}
+.chk.cur::after{content:'';width:8px;height:8px;background:var(--accent);border-radius:50%;display:block}
+.nav-txt{flex:1}
+.nav-num{color:rgba(255,255,255,.4);font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.nav-title{color:rgba(255,255,255,.82);font-size:12.5px;font-weight:500;line-height:1.35;margin-top:1px}
+.nav-item.active .nav-title{color:#fff;font-weight:600}
+.sb-foot{padding:14px 18px;border-top:1px solid rgba(255,255,255,.08)}
+.prog-lbl{color:rgba(255,255,255,.5);font-size:10.5px;display:flex;justify-content:space-between;margin-bottom:6px}
+.prog-track{height:4px;background:rgba(255,255,255,.12);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:var(--green);border-radius:4px;transition:width .4s ease;width:0%}
+#topbar{position:fixed;top:0;left:var(--sw);right:0;height:var(--th);background:#fff;border-bottom:2px solid #e4edf8;display:flex;align-items:center;justify-content:space-between;padding:0 32px;z-index:200;box-shadow:0 2px 12px rgba(27,58,107,.06)}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.wordmark{font-size:17px;font-weight:800;color:var(--navy);letter-spacing:-.02em}
+.wordmark em{color:var(--accent);font-style:normal}
+.mod-prog{font-size:13px;font-weight:600;color:var(--navy);background:#EEF4FF;padding:6px 16px;border-radius:20px;border:1px solid #c8d8f4;white-space:nowrap}
+#main{margin-left:var(--sw);padding-top:var(--th);min-height:100vh}
+.cwrap{max-width:980px;margin:0 auto;padding:38px 40px 80px}
+.msec{display:none}.msec.active{display:block}
+.hot-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#b45309;background:#FEF9EC;border:1px solid #fde68a;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+.mod-title{font-size:26px;font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:8px}
+.mod-sub{font-size:15px;color:var(--muted);line-height:1.5;margin-bottom:24px}
+.card{background:#fff;border-radius:14px;padding:26px 30px;margin-bottom:22px;border:1px solid #dde7f5;box-shadow:0 2px 8px rgba(27,58,107,.04)}
+.card-h{font-size:15.5px;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-icon{width:28px;height:28px;background:#EEF4FF;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+p{line-height:1.72;color:#374151;margin-bottom:12px;font-size:14.5px}
+p:last-child{margin-bottom:0}
+ul,ol{padding-left:20px;margin-bottom:12px}
+li{line-height:1.72;color:#374151;font-size:14.5px;margin-bottom:5px}
+strong{font-weight:700;color:#1e293b}
+.hl{background:#EEF6FF;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:15px 20px;margin:16px 0}
+.hl p{color:#1e40af;font-weight:500;margin:0}
+.tip{background:#ECFDF5;border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:15px 20px;margin:16px 0}
+.tip-lbl{font-size:11px;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.tip p{color:#065f46;margin:0}
+.warn{background:#FEF9EC;border-left:4px solid #F59E0B;border-radius:0 10px 10px 0;padding:15px 20px;margin:16px 0}
+.warn-lbl{font-size:11px;font-weight:700;color:#b45309;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.warn p{color:#78350f;margin:0}
+.nav-btns{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:22px;border-top:1px solid #e8eef7}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:inherit}
+.btn-ghost{background:transparent;color:var(--navy);border:1px solid #c8d8f4}
+.btn-ghost:hover{background:#EEF4FF}
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{background:#0da374;transform:translateY(-1px)}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:#162f5a;transform:translateY(-1px)}
+.step-layout{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+.step-col{min-width:0}
+.screenshot-float{position:sticky;top:calc(var(--th) + 20px)}
+.sf-card{background:#fff;border-radius:14px;border:1px solid #dde7f5;box-shadow:0 4px 16px rgba(27,58,107,.10);overflow:hidden}
+.sf-header{background:var(--navy);padding:12px 16px;display:flex;align-items:center;gap:10px}
+.sf-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.sf-title{color:#fff;font-size:12px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sf-step-badge{background:rgba(94,174,255,.25);color:var(--accent);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;white-space:nowrap;flex-shrink:0}
+.sf-img-wrap{background:#1a1a2e;min-height:200px;display:flex;align-items:stretch;justify-content:center;position:relative;overflow:hidden}
+.sf-img-wrap img{width:100%;height:auto;display:block;object-fit:contain;transition:opacity .3s ease}
+.sf-label{padding:10px 14px;background:#f8fafd;border-top:1px solid #e8eef7}
+.sf-label-text{font-size:11.5px;color:var(--muted);line-height:1.5;font-style:italic}
+.sf-nav-row{display:flex;gap:6px;padding:10px 14px;background:#fff;border-top:1px solid #e8eef7}
+.sf-btn{flex:1;padding:7px 10px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .15s}
+.sf-btn-prev{background:#EEF4FF;color:var(--navy)}
+.sf-btn-prev:hover:not(:disabled){background:#dceaff}
+.sf-btn-next{background:var(--navy);color:#fff}
+.sf-btn-next:hover:not(:disabled){background:#162f5a}
+.sf-btn:disabled{opacity:.4;cursor:default}
+.sf-progress{display:flex;gap:4px;align-items:center;justify-content:center;padding:8px 14px 10px;background:#fff}
+.sf-pip{width:6px;height:6px;border-radius:50%;background:#c8d8f4;transition:all .2s;cursor:pointer}
+.sf-pip.active{background:var(--navy);width:18px;border-radius:4px}
+.step-list{list-style:none;padding:0;margin:0}
+.step-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
+.step-item:last-child{margin-bottom:0}
+.sn{width:28px;height:28px;background:var(--navy);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.sn.sp-2{background:#3480CC}.sn.sp-3{background:var(--green)}.sn.sp-4{background:#e55a00}.sn.sp-5{background:#7c3aed}
+.sc{flex:1}
+.st{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.sd{font-size:13.5px;color:#4b5563;line-height:1.62}
+.format-box{background:#1e2d47;border-radius:10px;padding:16px 20px;margin:12px 0}
+.format-lbl{font-size:10.5px;font-weight:700;color:rgba(94,174,255,.7);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.format-code{color:#d1e3ff;font-size:14px;font-family:'Courier New',monospace;letter-spacing:.01em;line-height:1.6;margin:0}
+.format-example{color:rgba(94,174,255,.8);font-size:12px;margin-top:6px;font-style:italic}
+.screen-note{background:#FFFBEB;border:1.5px dashed #fcd34d;border-radius:10px;padding:12px 16px;margin:12px 0;font-size:13px;color:#92400e;line-height:1.6}
+.screen-note strong{color:#78350f}
+#comp{display:none;text-align:center;padding:60px 20px}
+.comp-ring{width:88px;height:88px;background:var(--green);border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center}
+.comp-ring svg{width:44px;height:44px;fill:#fff}
+.comp-title{font-size:30px;font-weight:800;color:var(--navy);margin-bottom:6px}
+.comp-msg{font-size:15px;color:#374151;max-width:500px;margin:16px auto 28px;line-height:1.65}
+.comp-badges{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:20px 0}
+.comp-badge{background:#fff;border:1px solid #dde7f5;border-radius:12px;padding:12px 18px;font-size:13px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:8px}
+.btn-restart{background:#EEF4FF;color:var(--navy);border:1px solid #c8d8f4;padding:12px 28px;font-size:14px;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:600}
+@media(max-width:900px){.step-layout{grid-template-columns:1fr}.screenshot-float{position:static}}
+@media(max-width:800px){:root{--sw:0px}#sidebar{width:278px;transform:translateX(-278px);transition:transform .3s}#sidebar.open{transform:translateX(0)}#topbar{left:0}.cwrap{padding:24px 18px 60px}.mod-title{font-size:22px}}
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="sb-head">
+    <div class="sb-badge">Claims Setup</div>
+    <div class="sb-course-title">Revenue Enablement<br>Series — Claims Email Setup</div>
+  </div>
+  <div class="sb-nav">
+    <div class="nav-label">Modules</div>
+    <div class="nav-item active" id="ni-1" onclick="goMod('1')">
+      <div class="chk cur" id="chk-1"></div>
+      <div class="nav-txt"><div class="nav-num">Module 1</div><div class="nav-title">Locate the Alias Email List</div></div>
+    </div>
+    <div class="nav-item" id="ni-2" onclick="goMod('2')">
+      <div class="chk" id="chk-2"></div>
+      <div class="nav-txt"><div class="nav-num">Module 2</div><div class="nav-title">Identify the Client's WMS</div></div>
+    </div>
+    <div class="nav-item" id="ni-3" onclick="goMod('3')">
+      <div class="chk" id="chk-3"></div>
+      <div class="nav-txt"><div class="nav-num">Module 3</div><div class="nav-title">Find the Shipping State</div></div>
+    </div>
+    <div class="nav-item" id="ni-4" onclick="goMod('4')">
+      <div class="chk" id="chk-4"></div>
+      <div class="nav-txt"><div class="nav-num">Module 4</div><div class="nav-title">Create the Claims Email</div></div>
+    </div>
+    <div class="nav-item" id="ni-5" onclick="goMod('5')">
+      <div class="chk" id="chk-5"></div>
+      <div class="nav-txt"><div class="nav-num">Module 5</div><div class="nav-title">Message Kaylynn in Slack</div></div>
+    </div>
+    <div class="nav-item" id="ni-6" onclick="goMod('6')">
+      <div class="chk" id="chk-6"></div>
+      <div class="nav-txt"><div class="nav-num">Module 6</div><div class="nav-title">Update the WMS Google Sheet</div></div>
+    </div>
+  </div>
+  <div class="sb-foot">
+    <div class="prog-lbl"><span>Course Progress</span><span id="prog-pct">0/6</span></div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+  </div>
+</nav>
+
+<header id="topbar">
+  <div class="logo-wrap">
+    <svg width="42" height="26" viewBox="0 0 42 26">
+      <polygon points="0,0 11,0 17,13 11,26 0,26 6,13" fill="#5EAEFF"/>
+      <polygon points="12,0 23,0 29,13 23,26 12,26 18,13" fill="#3480CC"/>
+      <polygon points="24,0 35,0 41,13 35,26 24,26 30,13" fill="#1B3A6B"/>
+    </svg>
+    <span class="wordmark"><em>i</em>Drive Logistics</span>
+  </div>
+  <div class="mod-prog" id="topbar-label">Module 1 — Locate the Alias Email List</div>
+</header>
+
+<main id="main"><div class="cwrap">
+
+<!-- MODULE 1 -->
+<section class="msec active" id="mod-1">
+  <div class="hot-tag">Claims Email Setup</div>
+  <h1 class="mod-title">Locate the Alias Email List</h1>
+  <p class="mod-sub">Before creating a claims email, you need to access the shared alias email spreadsheet in Google Drive. This sheet tracks all assigned emails and is your reference before adding a new one.</p>
+  <div class="step-layout">
+    <div class="step-col">
+      <div class="card">
+        <div class="card-h"><div class="card-icon">💬</div>Step 1 — Open Slack &amp; Find the Drive Link</div>
+        <ul class="step-list">
+          <li class="step-item"><div class="sn">1</div><div class="sc"><div class="st">Open Slack</div><div class="sd">Launch Slack if it isn't already open. You'll be starting from the VAP Onboarding Team chat.</div></div></li>
+          <li class="step-item"><div class="sn">2</div><div class="sc"><div class="st">Open the VAP Onboarding Team Chat</div><div class="sd">Navigate to the <strong>vap-onboarding-team</strong> channel in your Slack sidebar under Starred.</div></div></li>
+          <li class="step-item"><div class="sn">3</div><div class="sc"><div class="st">Click the Google Drive Links at the Top</div><div class="sd">At the top of the VAP Onboarding Team chat, you'll see pinned or posted Google Drive links. Click those links to open the shared folder.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">4</div><div class="sc"><div class="st">Open the Alias Email List</div><div class="sd">Find and open the <strong>Alias Email List</strong> from the Google Drive folder. This takes you to the spreadsheet where all alias and claims emails are tracked.</div></div></li>
+        </ul>
+        <div class="tip" style="margin-top:16px"><div class="tip-lbl">✅ Good to Know</div><p>You should now see a Google Sheets page with access to the shared email tracking spreadsheet. If you receive a permissions error, contact Kaylynn Caldwell to have access granted before proceeding.</p></div>
+      </div>
+    </div>
+    <div class="step-col">
+      <div class="screenshot-float">
+        <div class="sf-card">
+          <div class="sf-header">
+            <div class="sf-dot" style="background:#ef4444"></div><div class="sf-dot" style="background:#f59e0b;margin-left:4px"></div><div class="sf-dot" style="background:#10b981;margin-left:4px"></div>
+            <div class="sf-title" id="sf-title-1">Slack — VAP Onboarding Chat</div>
+            <div class="sf-step-badge" id="sf-badge-1">1 of 1</div>
+          </div>
+          <div class="sf-img-wrap" id="sf-img-1"><img id="sf-img-el-1" src="" alt="Screenshot reference"></div>
+          <div class="sf-label"><div class="sf-label-text" id="sf-caption-1">Open Slack → VAP Onboarding Team chat → click Google Drive links at the top</div></div>
+          <div class="sf-progress" id="sf-pips-1"><div class="sf-pip active"></div></div>
+          <div class="sf-nav-row">
+            <button class="sf-btn sf-btn-prev" id="sf-prev-1" disabled onclick="sfNav(1,-1)">← Prev</button>
+            <button class="sf-btn sf-btn-next" id="sf-next-1" disabled onclick="sfNav(1,1)">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-btns"><div></div><button class="btn btn-primary" onclick="completeMod('1')">Mark Complete &amp; Continue →</button></div>
+</section>
+
+<!-- MODULE 2 -->
+<section class="msec" id="mod-2">
+  <div class="hot-tag">Claims Email Setup</div>
+  <h1 class="mod-title">Identify the Client's WMS</h1>
+  <p class="mod-sub">The claims email name includes the WMS type. Before creating the email, you need to verify which WMS the client uses by checking the #closed-won-customers Slack channel.</p>
+  <div class="step-layout">
+    <div class="step-col">
+      <div class="card">
+        <div class="card-h"><div class="card-icon">📋</div>Step 2 — Check the Alias Tab &amp; Find the WMS</div>
+        <ul class="step-list">
+          <li class="step-item"><div class="sn">1</div><div class="sc"><div class="st">Navigate to the "Alias for Claims Inbox" Tab</div><div class="sd">At the bottom of the Google Sheets spreadsheet, locate and click the tab labeled <strong>Alias for Claims Inbox</strong>. Make sure you are on this specific tab before proceeding.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">2</div><div class="sc"><div class="st">Go to the #closed-won-customers Slack Channel</div><div class="sd">Open Slack and navigate to the <strong>#closed-won-customers</strong> channel. Find the HubSpot post for the customer you are currently setting up a claims email for.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">3</div><div class="sc"><div class="st">Note the WMS Listed for This Customer</div><div class="sd">In the closed-won post, expand <strong>Show more / Show less</strong> if needed and locate the <strong>WMS</strong> field. Note the exact WMS name — e.g. <strong>Packiyo</strong>. You will use this in the email address.</div></div></li>
+        </ul>
+        <div class="warn" style="margin-top:16px"><div class="warn-lbl">⚠️ Important</div><p>The WMS name in the email address must match exactly what is listed in the #closed-won post. Using the wrong name or abbreviation will cause a mismatch in the tracking sheet.</p></div>
+      </div>
+    </div>
+    <div class="step-col">
+      <div class="screenshot-float">
+        <div class="sf-card">
+          <div class="sf-header">
+            <div class="sf-dot" style="background:#ef4444"></div><div class="sf-dot" style="background:#f59e0b;margin-left:4px"></div><div class="sf-dot" style="background:#10b981;margin-left:4px"></div>
+            <div class="sf-title" id="sf-title-2">Reference Screenshot</div>
+            <div class="sf-step-badge" id="sf-badge-2">1 of 2</div>
+          </div>
+          <div class="sf-img-wrap" id="sf-img-2"><img id="sf-img-el-2" src="" alt="Screenshot reference"></div>
+          <div class="sf-label"><div class="sf-label-text" id="sf-caption-2">Loading…</div></div>
+          <div class="sf-progress" id="sf-pips-2"><div class="sf-pip active" onclick="setSFStep(2,0)"></div><div class="sf-pip" onclick="setSFStep(2,1)"></div></div>
+          <div class="sf-nav-row">
+            <button class="sf-btn sf-btn-prev" id="sf-prev-2" disabled onclick="sfNav(2,-1)">← Prev</button>
+            <button class="sf-btn sf-btn-next" id="sf-next-2" onclick="sfNav(2,1)">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-btns"><button class="btn btn-ghost" onclick="goMod('1')">← Back to Module 1</button><button class="btn btn-primary" onclick="completeMod('2')">Mark Complete &amp; Continue →</button></div>
+</section>
+
+<!-- MODULE 3 -->
+<section class="msec" id="mod-3">
+  <div class="hot-tag">Claims Email Setup</div>
+  <h1 class="mod-title">Find the Shipping State</h1>
+  <p class="mod-sub">The claims email address also includes the state abbreviation of the client's shipping facility. You'll locate this from the onboarding PDF inside Outlook.</p>
+  <div class="step-layout">
+    <div class="step-col">
+      <div class="card">
+        <div class="card-h"><div class="card-icon">✉️</div>Step 3 — Check Outlook for the Onboarding Email</div>
+        <ul class="step-list">
+          <li class="step-item"><div class="sn">1</div><div class="sc"><div class="st">Open Outlook</div><div class="sd">Open Microsoft Outlook and navigate to the <strong>Onboarding email inbox</strong> in the left sidebar. This is the shared inbox where completed DocuSign agreements arrive.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">2</div><div class="sc"><div class="st">Find the Closed Email for This Customer</div><div class="sd">Search for or scroll to find the same customer's completed DocuSign email. Look for a subject line beginning with <strong>"Completed:"</strong> from Docusign.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">3</div><div class="sc"><div class="st">Open the Info PDF Attachment</div><div class="sd">Inside that email, locate the <strong>3PL Onboarding Form</strong> PDF attachment (there may be two — open the one labeled v1). Click it to preview.</div></div></li>
+          <li class="step-item"><div class="sn sp-3">4</div><div class="sc"><div class="st">Note the State Under Shipping Information</div><div class="sd">In the PDF preview, find the <strong>Shipping Information</strong> section at the top. Look at the <strong>City, State, Zip code</strong> row and note the <strong>state abbreviation</strong> (e.g. MI). You will use this in the email address.</div></div></li>
+        </ul>
+        <div class="hl" style="margin-top:16px"><p>📌 Write down both the WMS name (from Module 2) and the state abbreviation (from this step) before moving on. You'll need both to create the email in the next module.</p></div>
+      </div>
+    </div>
+    <div class="step-col">
+      <div class="screenshot-float">
+        <div class="sf-card">
+          <div class="sf-header">
+            <div class="sf-dot" style="background:#ef4444"></div><div class="sf-dot" style="background:#f59e0b;margin-left:4px"></div><div class="sf-dot" style="background:#10b981;margin-left:4px"></div>
+            <div class="sf-title" id="sf-title-3">Reference Screenshot</div>
+            <div class="sf-step-badge" id="sf-badge-3">1 of 2</div>
+          </div>
+          <div class="sf-img-wrap" id="sf-img-3"><img id="sf-img-el-3" src="" alt="Screenshot reference"></div>
+          <div class="sf-label"><div class="sf-label-text" id="sf-caption-3">Loading…</div></div>
+          <div class="sf-progress" id="sf-pips-3"><div class="sf-pip active" onclick="setSFStep(3,0)"></div><div class="sf-pip" onclick="setSFStep(3,1)"></div></div>
+          <div class="sf-nav-row">
+            <button class="sf-btn sf-btn-prev" id="sf-prev-3" disabled onclick="sfNav(3,-1)">← Prev</button>
+            <button class="sf-btn sf-btn-next" id="sf-next-3" onclick="sfNav(3,1)">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-btns"><button class="btn btn-ghost" onclick="goMod('2')">← Back to Module 2</button><button class="btn btn-primary" onclick="completeMod('3')">Mark Complete &amp; Continue →</button></div>
+</section>
+
+<!-- MODULE 4 -->
+<section class="msec" id="mod-4">
+  <div class="hot-tag">Claims Email Setup</div>
+  <h1 class="mod-title">Create the Claims Email Address</h1>
+  <p class="mod-sub">Now that you have the WMS name and the state abbreviation, you're ready to create the claims email address and capture an annotated screenshot to send to Kaylynn.</p>
+  <div class="step-layout">
+    <div class="step-col">
+      <div class="card">
+        <div class="card-h"><div class="card-icon">📧</div>Step 4 — Build &amp; Screenshot the Email Address</div>
+        <p style="margin-bottom:16px">Use the following format to construct the claims email address:</p>
+        <div class="format-box">
+          <div class="format-lbl">📋 Email Format</div>
+          <div class="format-code">WMS-companyname-state-claims@idrivelogistics.com</div>
+          <div class="format-example">Example: Packiyo-Encore-MI-claims@idrivelogistics.com</div>
+        </div>
+        <ul class="step-list" style="margin-top:20px">
+          <li class="step-item"><div class="sn">1</div><div class="sc"><div class="st">Create the Email Address</div><div class="sd">Using the WMS, company name, and state you've collected, construct and enter the claims email address in the appropriate field.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">2</div><div class="sc"><div class="st">Take a Screenshot — Windows + Shift + S</div><div class="sd">Press <strong>Windows + Shift + S</strong>. A snipping overlay appears. Drag to capture the relevant area of the screen. The screenshot is automatically copied to clipboard and a notification pops up.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">3</div><div class="sc"><div class="st">Click the Snipping Tool Notification</div><div class="sd">Click the <strong>Snipping Tool</strong> notification that appears in the bottom-right corner (or open it from the notification center by clicking the timestamp). This opens the screenshot in the editor.</div></div></li>
+          <li class="step-item"><div class="sn sp-3">4</div><div class="sc"><div class="st">Click the Highlighter Icon &amp; Copy Icon</div><div class="sd">In the Snipping Tool toolbar, click the <strong>highlighter icon</strong> (yellow marker). Use it to highlight the relevant fields. Then click the <strong>copy icon</strong> (top right) to copy the annotated screenshot to clipboard.</div></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="step-col">
+      <div class="screenshot-float">
+        <div class="sf-card">
+          <div class="sf-header">
+            <div class="sf-dot" style="background:#ef4444"></div><div class="sf-dot" style="background:#f59e0b;margin-left:4px"></div><div class="sf-dot" style="background:#10b981;margin-left:4px"></div>
+            <div class="sf-title" id="sf-title-4">Reference Screenshot</div>
+            <div class="sf-step-badge" id="sf-badge-4">1 of 2</div>
+          </div>
+          <div class="sf-img-wrap" id="sf-img-4"><img id="sf-img-el-4" src="" alt="Screenshot reference"></div>
+          <div class="sf-label"><div class="sf-label-text" id="sf-caption-4">Loading…</div></div>
+          <div class="sf-progress" id="sf-pips-4"><div class="sf-pip active" onclick="setSFStep(4,0)"></div><div class="sf-pip" onclick="setSFStep(4,1)"></div></div>
+          <div class="sf-nav-row">
+            <button class="sf-btn sf-btn-prev" id="sf-prev-4" disabled onclick="sfNav(4,-1)">← Prev</button>
+            <button class="sf-btn sf-btn-next" id="sf-next-4" onclick="sfNav(4,1)">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-btns"><button class="btn btn-ghost" onclick="goMod('3')">← Back to Module 3</button><button class="btn btn-primary" onclick="completeMod('4')">Mark Complete &amp; Continue →</button></div>
+</section>
+
+<!-- MODULE 5 -->
+<section class="msec" id="mod-5">
+  <div class="hot-tag">Claims Email Setup</div>
+  <h1 class="mod-title">Message Kaylynn in Slack</h1>
+  <p class="mod-sub">With your annotated screenshot copied to clipboard, you'll now send Kaylynn Caldwell a Slack DM requesting she create the claims email — including the sheet link and screenshot.</p>
+  <div class="step-layout">
+    <div class="step-col">
+      <div class="card">
+        <div class="card-h"><div class="card-icon">💬</div>Step 5 — Send the Request to Kaylynn</div>
+        <ul class="step-list">
+          <li class="step-item"><div class="sn">1</div><div class="sc"><div class="st">Search for Kaylynn Caldwell in Slack</div><div class="sd">In the Slack search bar at the top, type <strong>Kaylynn Caldwell</strong> and click her name to open a direct message.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">2</div><div class="sc"><div class="st">Paste the Screenshot — Ctrl + V</div><div class="sd">Click in the message text box and press <strong>Ctrl + V</strong> to paste the annotated screenshot you copied in the previous module.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">3</div><div class="sc"><div class="st">Copy &amp; Paste the Google Sheet Link</div><div class="sd">Go back to the Google Sheet (Alias Email List), copy the URL from the browser address bar, and paste it into the Slack message alongside the screenshot.</div></div></li>
+          <li class="step-item"><div class="sn sp-3">4</div><div class="sc"><div class="st">Press Ctrl + Enter for a New Line</div><div class="sd">Hold <strong>Ctrl + Enter</strong> to start a new line without sending. Type your message below the link.</div></div></li>
+          <li class="step-item"><div class="sn sp-3">5</div><div class="sc"><div class="st">Type Your Message &amp; Send</div><div class="sd">Type a short request — or use the example below — then verify the screenshot and link are both present and click <strong>Send</strong>.</div></div></li>
+        </ul>
+        <div class="format-box" style="margin-top:16px">
+          <div class="format-lbl">💬 Suggested Message</div>
+          <div class="format-code" style="font-family:'Inter',sans-serif;font-style:italic">Good afternoon Kaylynn! Can you create this claims email when you have time? Thanks!</div>
+        </div>
+        <div class="screen-note" style="margin-top:14px"><strong>📎 Before sending, verify:</strong> The Google Sheet link is in the message AND the annotated screenshot is attached. Both are required.</div>
+      </div>
+    </div>
+    <div class="step-col">
+      <div class="screenshot-float">
+        <div class="sf-card">
+          <div class="sf-header">
+            <div class="sf-dot" style="background:#ef4444"></div><div class="sf-dot" style="background:#f59e0b;margin-left:4px"></div><div class="sf-dot" style="background:#10b981;margin-left:4px"></div>
+            <div class="sf-title" id="sf-title-5">Reference Screenshot</div>
+            <div class="sf-step-badge" id="sf-badge-5">1 of 1</div>
+          </div>
+          <div class="sf-img-wrap" id="sf-img-5"><img id="sf-img-el-5" src="" alt="Screenshot reference"></div>
+          <div class="sf-label"><div class="sf-label-text" id="sf-caption-5">Loading…</div></div>
+          <div class="sf-progress" id="sf-pips-5"><div class="sf-pip active"></div></div>
+          <div class="sf-nav-row">
+            <button class="sf-btn sf-btn-prev" id="sf-prev-5" disabled onclick="sfNav(5,-1)">← Prev</button>
+            <button class="sf-btn sf-btn-next" id="sf-next-5" disabled onclick="sfNav(5,1)">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-btns"><button class="btn btn-ghost" onclick="goMod('4')">← Back to Module 4</button><button class="btn btn-primary" onclick="completeMod('5')">Mark Complete &amp; Continue →</button></div>
+</section>
+
+<!-- MODULE 6 -->
+<section class="msec" id="mod-6">
+  <div class="hot-tag">Claims Email Setup</div>
+  <h1 class="mod-title">Update the WMS Google Sheet</h1>
+  <p class="mod-sub">The final step is to log the new claims email in the WMS Onboarding tracking sheet, then proceed to Easypost setup for this specific email address.</p>
+  <div class="step-layout">
+    <div class="step-col">
+      <div class="card">
+        <div class="card-h"><div class="card-icon">📊</div>Step 6 — Log the Email in the Tracking Sheet</div>
+        <ul class="step-list">
+          <li class="step-item"><div class="sn">1</div><div class="sc"><div class="st">Return to the Google Sheet</div><div class="sd">Go back to the Google Sheets spreadsheet you were working in (the Alias Email List).</div></div></li>
+          <li class="step-item"><div class="sn sp-2">2</div><div class="sc"><div class="st">Switch to the WMSOnboarding Tab</div><div class="sd">At the bottom of the spreadsheet, click the <strong>WMSOnboarding</strong> tab. Make sure you are on this tab — not the Alias for Claims Inbox tab from earlier.</div></div></li>
+          <li class="step-item"><div class="sn sp-2">3</div><div class="sc"><div class="st">Add the Business Name to the Next Open Row</div><div class="sd">Find the next empty row and add the business name for the company you're onboarding. This reserves their slot and keeps the sheet in order.</div></div></li>
+        </ul>
+        <div class="warn" style="margin-top:16px"><div class="warn-lbl">📌 Note for Training</div><p>Because the example company uses <strong>Packiyo</strong>, the training exercise uses the next available email slot. For your actual onboarding, use whatever company you are currently setting up — do not use the training example company in the live sheet.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="card-icon">⚡</div>Next Step — Proceed to Easypost Setup</div>
+        <p>Now that the claims email has been designated and logged, follow the <strong>Easypost Training</strong> to get this specific email set up in Easypost.</p>
+        <div class="hl"><p>📬 Because the claims email is formatted as <strong>WMSOnboarding@idrivelogistics.com</strong>, the Easypost verification code will be sent to the <strong>WMSOnboarding email in your Outlook</strong>. Ensure Kaylynn has given you access to the relevant onboarding emails before starting. Follow the Easypost instructions exactly.</p></div>
+        <div class="tip" style="margin-top:12px"><div class="tip-lbl">✅ You're All Set</div><p>Once Easypost setup is complete for this claims email, the claims email onboarding for this client is done. Good luck!</p></div>
+      </div>
+    </div>
+    <div class="step-col">
+      <div class="screenshot-float">
+        <div class="sf-card">
+          <div class="sf-header">
+            <div class="sf-dot" style="background:#ef4444"></div><div class="sf-dot" style="background:#f59e0b;margin-left:4px"></div><div class="sf-dot" style="background:#10b981;margin-left:4px"></div>
+            <div class="sf-title" id="sf-title-6">Reference Screenshot</div>
+            <div class="sf-step-badge" id="sf-badge-6">1 of 1</div>
+          </div>
+          <div class="sf-img-wrap" id="sf-img-6"><img id="sf-img-el-6" src="" alt="Screenshot reference"></div>
+          <div class="sf-label"><div class="sf-label-text" id="sf-caption-6">Loading…</div></div>
+          <div class="sf-progress" id="sf-pips-6"><div class="sf-pip active"></div></div>
+          <div class="sf-nav-row">
+            <button class="sf-btn sf-btn-prev" id="sf-prev-6" disabled onclick="sfNav(6,-1)">← Prev</button>
+            <button class="sf-btn sf-btn-next" id="sf-next-6" disabled onclick="sfNav(6,1)">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-btns"><button class="btn btn-ghost" onclick="goMod('5')">← Back to Module 5</button><button class="btn btn-success" onclick="completeMod('6')">Complete Training ✓</button></div>
+</section>
+
+<!-- COMPLETION -->
+<section id="comp">
+  <div class="comp-ring"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+  <div class="comp-title">Training Complete!</div>
+  <div class="comp-msg">You've completed the Claims Email Setup training. You now know how to locate the alias sheet, identify the WMS and shipping state, create the correctly formatted claims email, notify Kaylynn, and log the entry in the WMS Onboarding sheet.</div>
+  <div class="comp-badges">
+    <div class="comp-badge">📧 Claims Email Format Certified</div>
+    <div class="comp-badge">📊 Sheet Tracking Ready</div>
+    <div class="comp-badge">🏆 Claims Setup Complete</div>
+  </div>
+  <button class="btn-restart" onclick="restartAll()">↺ Restart Training</button>
+</section>
+
+</div></main>
+
+<script>
+// ── Image data ── Each entry: [src, title, caption]
+// Images are loaded from the user-uploaded files via their IDs.
+// We use a JS image loader that converts the uploaded blobs to data URLs.
+
+const IMGS = {
+  // Module 1: VAP onboarding Slack chat (Image 1 = setup channel view, good match)
+  m1_0: { title:'Slack — Setup Channel Overview', caption:'The setup channel shows the closed-won post with carrier info and WMS details — similar structure to the VAP Onboarding team chat with Drive links pinned at top.' },
+  // Module 2: closed-won-customers channel showing WMS: Packiyo (Image 2), and the closed-won channel WMS post (Image 1 bottom)
+  m2_0: { title:'Slack — #closed-won-customers', caption:'#closed-won-customers: find your client\'s HubSpot post, expand "Show less" to see the full details including WMS.' },
+  m2_1: { title:'Slack — WMS field highlighted', caption:'Locate the WMS field in the HubSpot post — e.g. WMS: Packiyo. Note this exact name for use in the email address.' },
+  // Module 3: Outlook inbox (Image 10), PDF open (Image 11)
+  m3_0: { title:'Outlook — Onboarding Inbox', caption:'Outlook: open the Onboarding inbox from the left sidebar → find the "Completed:" DocuSign email for your customer → click the v1 PDF attachment.' },
+  m3_1: { title:'Info PDF — Shipping Information', caption:'PDF preview: find the Shipping Information section at the top. Note the state abbreviation in the City, State, Zip code row (e.g. MI).' },
+  // Module 4: Snipping tool notification (Image 13), Snipping tool with highlights (Image 14)
+  m4_0: { title:'Snipping Tool — Notification', caption:'After pressing Windows+Shift+S and dragging your selection, a notification appears — click it to open the screenshot in the Snipping Tool editor.' },
+  m4_1: { title:'Snipping Tool — Annotate &amp; Copy', caption:'Use the highlighter icon (yellow marker) to highlight the relevant fields, then click the copy icon (top right) to copy the annotated screenshot to clipboard.' },
+  // Module 5: Slack DM (reuse Image 1 / Image 2 — best available; no DM screenshot in set)
+  m5_0: { title:'Slack — DM to Kaylynn Caldwell', caption:'Search for Kaylynn Caldwell in Slack → open DM → paste screenshot + sheet link + your message → verify both are present → Send.' },
+  // Module 6: WMS onboarding sheet — best represented by Image 1 (sheet-like view)
+  m6_0: { title:'Google Sheet — WMSOnboarding Tab', caption:'Switch to the WMSOnboarding tab at the bottom of the sheet → find the next empty row → add the business name to reserve the slot.' },
+};
+
+// Map module panels to image element IDs in the page
+// SF_CONFIG[mod] = array of {imgKey, title, caption}
+const SF_CONFIG = {
+  1: [{ imgKey:'m1_0', title:'Slack — Setup Channel Overview', caption:'The setup channel shows the closed-won post structure. Your VAP Onboarding Team chat will have Google Drive links pinned at the top — click those to open the Alias Email List.' }],
+  2: [
+    { imgKey:'m2_0', title:'Slack — #closed-won-customers', caption:'#closed-won-customers channel: find the HubSpot post for your customer and expand it to see all fields including the WMS.' },
+    { imgKey:'m2_1', title:'Slack — WMS: Packiyo highlighted', caption:'The WMS field is listed at the bottom of the deal details — note the exact name (e.g. Packiyo) to use in the email address.' }
+  ],
+  3: [
+    { imgKey:'m3_0', title:'Outlook — Onboarding Inbox', caption:'Outlook: Onboarding inbox → find the "Completed" DocuSign email → click the 3PL Onboarding Form v1 PDF attachment to preview it.' },
+    { imgKey:'m3_1', title:'PDF — Shipping Information section', caption:'Shipping Information: locate the City, State, Zip code row and note the state abbreviation (e.g. MI for Kentwood, MI 49512).' }
+  ],
+  4: [
+    { imgKey:'m4_0', title:'Snipping Tool notification', caption:'After pressing Windows+Shift+S and capturing your selection, click the Snipping Tool notification in the bottom-right corner to open the annotation editor.' },
+    { imgKey:'m4_1', title:'Snipping Tool — Highlight &amp; Copy', caption:'Click the highlighter icon (yellow marker, top toolbar), highlight the key fields, then click the copy icon (top right, next to the floppy disk) to copy to clipboard.' }
+  ],
+  5: [{ imgKey:'m5_0', title:'Slack — Closed-won reference', caption:'Search Kaylynn Caldwell in Slack → open DM → Ctrl+V to paste screenshot → paste sheet URL → Ctrl+Enter for new line → type message → Send.' }],
+  6: [{ imgKey:'m6_0', title:'Google Sheet — WMSOnboarding tab', caption:'Return to the Google Sheet → click the WMSOnboarding tab at the bottom → find the next empty row → type the business name to reserve the slot.' }]
+};
+
+// Map imgKey → the user-uploaded image IDs (by upload order / content match)
+// Images uploaded (0-indexed): 0=setup channel, 1=closed-won WMS, 2=closed-won channel create, 
+// 3=create channel step2, 4=add people skip, 5=move to setups, 6=members modal search, 
+// 7=members added, 8=members 6 list, 9=outlook inbox, 10=pdf shipping info, 
+// 11=slack setup channel posted, 12=snipping tool notification, 13=snipping tool annotate
+const IMG_MAP = {
+  m1_0: 0,   // setup channel — best match for "what a Slack setup channel looks like"
+  m2_0: 1,   // closed-won-customers channel showing WMS: Packiyo
+  m2_1: 1,   // same image, second pip shows same screenshot (only 1 closed-won image)
+  m3_0: 9,   // Outlook inbox with DocuSign email
+  m3_1: 10,  // PDF preview with Shipping Information
+  m4_0: 12,  // Snipping tool notification popup
+  m4_1: 13,  // Snipping tool with highlighter and copy button
+  m5_0: 1,   // No DM screenshot — use closed-won as reference context
+  m6_0: 11,  // Setup channel with posted info — closest to sheet tracking concept
+};
+
+// Store base64 data URLs after encoding
+const imgCache = {};
+
+// The uploaded images come in as Blobs via the chat interface.
+// We'll use a fetch-based approach to load them by their relative URLs
+// since Claude's artifact environment provides them as uploadedImages[N].
+
+const sfSteps = {1:0,2:0,3:0,4:0,5:0,6:0};
+
+function renderSF(mod) {
+  const cfg = SF_CONFIG[mod];
+  const step = sfSteps[mod];
+  const c = cfg[step];
+  const badge = document.getElementById('sf-badge-' + mod);
+  const caption = document.getElementById('sf-caption-' + mod);
+  const title = document.getElementById('sf-title-' + mod);
+  const prev = document.getElementById('sf-prev-' + mod);
+  const next = document.getElementById('sf-next-' + mod);
+  const pips = document.getElementById('sf-pips-' + mod);
+  const img = document.getElementById('sf-img-el-' + mod);
+  if (badge) badge.textContent = (step + 1) + ' of ' + cfg.length;
+  if (caption) caption.innerHTML = c.caption;
+  if (title) title.innerHTML = c.title;
+  if (prev) prev.disabled = step === 0;
+  if (next) next.disabled = step === cfg.length - 1;
+  if (pips) {
+    const dots = pips.querySelectorAll('.sf-pip');
+    dots.forEach((d, i) => d.classList.toggle('active', i === step));
+  }
+  if (img) {
+    const imgIdx = IMG_MAP[c.imgKey];
+    const cached = imgCache[imgIdx];
+    if (cached) {
+      img.style.opacity = '0';
+      setTimeout(() => { img.src = cached; img.style.opacity = '1'; }, 50);
+    }
+  }
+}
+
+function sfNav(mod, dir) {
+  const cfg = SF_CONFIG[mod];
+  const next = sfSteps[mod] + dir;
+  if (next < 0 || next >= cfg.length) return;
+  sfSteps[mod] = next;
+  renderSF(mod);
+}
+
+function setSFStep(mod, step) {
+  sfSteps[mod] = step;
+  renderSF(mod);
+}
+
+// ── Course navigation ──
+const MODS = ['1','2','3','4','5','6'];
+let completed = {}; MODS.forEach(m => completed[m] = false);
+let curMod = '1';
+
+function goMod(id) {
+  document.querySelectorAll('.msec').forEach(s => s.classList.remove('active'));
+  document.getElementById('comp').style.display = 'none';
+  const sec = document.getElementById('mod-' + id);
+  if (sec) sec.classList.add('active');
+  curMod = id; refreshSidebar(); refreshTopbar(); window.scrollTo(0,0);
+}
+function completeMod(id) {
+  completed[id] = true; refreshSidebar(); refreshProgress();
+  const idx = MODS.indexOf(id);
+  if (idx < MODS.length - 1) goMod(MODS[idx + 1]); else showComp();
+}
+function showComp() {
+  document.querySelectorAll('.msec').forEach(s => s.classList.remove('active'));
+  document.getElementById('comp').style.display = 'block';
+  refreshTopbar(); window.scrollTo(0,0);
+}
+function refreshSidebar() {
+  MODS.forEach(m => {
+    const chk = document.getElementById('chk-' + m);
+    const ni = document.getElementById('ni-' + m);
+    if (!chk || !ni) return;
+    chk.className = 'chk'; ni.classList.remove('active');
+    if (completed[m]) chk.classList.add('done');
+    else if (m === curMod) { chk.classList.add('cur'); ni.classList.add('active'); }
+  });
+}
+function refreshProgress() {
+  const cnt = MODS.filter(m => completed[m]).length;
+  const fill = document.getElementById('prog-fill');
+  const pct = document.getElementById('prog-pct');
+  if (fill) fill.style.width = ((cnt / MODS.length) * 100) + '%';
+  if (pct) pct.textContent = cnt + '/6';
+}
+function refreshTopbar() {
+  const lbl = document.getElementById('topbar-label'); if (!lbl) return;
+  const labels = {
+    '1':'Module 1 — Locate the Alias Email List',
+    '2':'Module 2 — Identify the Client\'s WMS',
+    '3':'Module 3 — Find the Shipping State',
+    '4':'Module 4 — Create the Claims Email',
+    '5':'Module 5 — Message Kaylynn in Slack',
+    '6':'Module 6 — Update the WMS Google Sheet'
+  };
+  lbl.textContent = labels[curMod] || 'Claims Email Setup';
+}
+function restartAll() {
+  MODS.forEach(m => completed[m] = false);
+  Object.keys(sfSteps).forEach(k => { sfSteps[k] = 0; renderSF(parseInt(k)); });
+  refreshProgress(); goMod('1');
+}
+
+// ── Load images from uploadedImages provided by Claude's artifact environment ──
+// The images uploaded in this conversation are accessible via window.uploadedImages
+// as an array of {id, dataUrl} objects in the order they were uploaded.
+async function loadImages() {
+  // Try to access images from the artifact's image store
+  if (window.uploadedImages && window.uploadedImages.length > 0) {
+    window.uploadedImages.forEach((img, i) => {
+      imgCache[i] = img.dataUrl || img.src || img;
+    });
+    MODS.forEach(m => renderSF(parseInt(m)));
+    return;
+  }
+
+  // Fallback: images are passed as <img> elements with data-upload-id attributes
+  // or via the imageData global that Claude's environment injects
+  if (window.imageData) {
+    Object.entries(window.imageData).forEach(([idx, url]) => {
+      imgCache[parseInt(idx)] = url;
+    });
+    MODS.forEach(m => renderSF(parseInt(m)));
+    return;
+  }
+
+  // Final fallback: render panels with placeholder message
+  MODS.forEach(m => {
+    const img = document.getElementById('sf-img-el-' + m);
+    if (img) {
+      img.style.display = 'none';
+      const wrap = document.getElementById('sf-img-' + m);
+      if (wrap) wrap.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;color:rgba(255,255,255,.5);gap:8px;min-height:200px;text-align:center"><div style="font-size:28px;opacity:.4">🖼️</div><div style="font-size:11px;line-height:1.6">To display screenshots,<br>save this file locally and<br>place your images in the<br>same folder, or use the<br>GitHub Pages method.</div></div>';
+    }
+    renderSF(parseInt(m));
+  });
+}
+
+// ── Init ──
+goMod('1');
+loadImages();
+</script>
+
+<!-- 
+  ══════════════════════════════════════════════════════════════
+  TO HOST THIS FILE WITH IMAGES:
+
+  OPTION A — GitHub Pages (free, shareable link):
+  1. Go to github.com → New repository → name it "idrive-training"
+  2. Upload THIS html file
+  3. Settings → Pages → Source: main branch → Save
+  4. Your link: yourusername.github.io/idrive-training/claims_email_training.html
+
+  OPTION B — Add images directly to this file:
+  Replace each  imgCache[N] = "..."  below with your base64 images.
+  Use Windows PowerShell to convert: 
+    [Convert]::ToBase64String([IO.File]::ReadAllBytes("claims1.png"))
+  Then wrap as: data:image/png;base64,<output>
+  ══════════════════════════════════════════════════════════════
+-->
+</body>
+</html>
